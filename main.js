@@ -1,394 +1,237 @@
-/**
- * AgroCarbon · Agrinho 2025
- * JavaScript Vanilla — sem frameworks
- */
+/* ============================================================
+   AGRINHO 2025 — script.js  (completo e corrigido)
+   ============================================================ */
  
-// Aguarda o DOM estar completamente carregado antes de executar qualquer coisa
-document.addEventListener('DOMContentLoaded', function () {
+var currentBlock = 1;
+var toastTimer;
  
-  /* ═══════════════════════════════════════════════════════════
-     1. NAVEGAÇÃO
-     ═══════════════════════════════════════════════════════════ */
+/* ── NAV SCROLL ──────────────────────────────────────────── */
+window.addEventListener('scroll', function () {
+  var nav = document.getElementById('nav');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+});
  
-  const header    = document.querySelector('.site-header');
-  const navToggle = document.getElementById('navToggle');
-  const siteNav   = document.getElementById('siteNav');
-  const navLinks  = siteNav ? siteNav.querySelectorAll('a') : [];
- 
-  function handleHeaderScroll() {
-    if (window.scrollY > 20) {
-      header && header.classList.add('scrolled');
-    } else {
-      header && header.classList.remove('scrolled');
-    }
-  }
- 
-  function toggleMobileNav() {
-    const isOpen = siteNav.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
-  }
- 
-  function closeMobileNav() {
-    siteNav && siteNav.classList.remove('open');
-    navToggle && navToggle.setAttribute('aria-expanded', 'false');
-    navToggle && navToggle.setAttribute('aria-label', 'Abrir menu');
-  }
- 
-  document.addEventListener('click', function (e) {
-    if (
-      siteNav && siteNav.classList.contains('open') &&
-      !siteNav.contains(e.target) &&
-      navToggle && !navToggle.contains(e.target)
-    ) {
-      closeMobileNav();
-    }
+/* ── LIKERT ──────────────────────────────────────────────── */
+function pickLikert(groupId, value) {
+  var group = document.getElementById(groupId);
+  if (!group) return;
+  group.querySelectorAll('.lk-btn').forEach(function (btn, i) {
+    btn.classList.toggle('selected', i + 1 === value);
   });
+}
  
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && siteNav && siteNav.classList.contains('open')) {
-      closeMobileNav();
-      navToggle && navToggle.focus();
-    }
-  });
+/* ── NAVEGAÇÃO DOS BLOCOS ────────────────────────────────── */
+function goBlock(n) {
+  var current = document.getElementById('block' + currentBlock);
+  if (current) current.classList.add('hidden');
  
-  window.addEventListener('scroll', handleHeaderScroll, { passive: true });
-  navToggle && navToggle.addEventListener('click', toggleMobileNav);
-  navLinks.forEach(function (link) {
-    link.addEventListener('click', closeMobileNav);
-  });
- 
-  handleHeaderScroll();
- 
- 
-  /* ═══════════════════════════════════════════════════════════
-     2. CARBON TICKER
-     ═══════════════════════════════════════════════════════════ */
- 
-  var tickerEl = document.getElementById('tickerValue');
- 
-  if (tickerEl) {
-    var DAILY_TARGET = 958904;
-    var now = new Date();
-    var secondsToday = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-    var dayFraction  = secondsToday / 86400;
-    var currentValue = Math.floor(DAILY_TARGET * dayFraction);
- 
-    function animateToValue(start, end, duration) {
-      var startTime = performance.now();
-      function update(nowTime) {
-        var elapsed  = nowTime - startTime;
-        var progress = Math.min(elapsed / duration, 1);
-        var eased    = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        var value    = Math.floor(start + (end - start) * eased);
-        tickerEl.textContent = value.toLocaleString('pt-BR');
-        if (progress < 1) requestAnimationFrame(update);
-      }
-      requestAnimationFrame(update);
-    }
- 
-    animateToValue(0, currentValue, 2500);
- 
+  var next = document.getElementById('block' + n);
+  if (next) {
+    next.classList.remove('hidden');
     setTimeout(function () {
-      setInterval(function () {
-        currentValue += Math.floor(Math.random() * 3) + 1;
-        tickerEl.textContent = currentValue.toLocaleString('pt-BR');
-      }, 1100);
-    }, 2600);
+      var top = next.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 30);
   }
  
+  currentBlock = n;
  
-  /* ═══════════════════════════════════════════════════════════
-     3. ANIMAÇÕES DE ENTRADA
-     ═══════════════════════════════════════════════════════════ */
+  var pcts = { 1: 25, 2: 50, 3: 75, 4: 100 };
+  var p = pcts[n] || 25;
+  var bar = document.getElementById('surveyBar');
+  var lbl = document.getElementById('spLabel');
+  var pct = document.getElementById('spPct');
+  if (bar) bar.style.width = p + '%';
+  if (lbl) lbl.textContent = 'Bloco ' + n + ' de 4';
+  if (pct) pct.textContent = p + '%';
  
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var animatables = document.querySelectorAll(
-      '.stat-card, .flow-step, .practice-card, .tech-item, .callout, .section-header'
-    );
+  document.querySelectorAll('.sp-step').forEach(function (dot) {
+    var bn = parseInt(dot.getAttribute('data-block'));
+    dot.classList.remove('active', 'done');
+    if (bn === n) dot.classList.add('active');
+    else if (bn < n) dot.classList.add('done');
+  });
+}
  
-    animatables.forEach(function (el, i) {
-      el.classList.add('fade-in-up');
-      var siblings = el.parentElement ? el.parentElement.children : [];
-      var idx = Array.from(siblings).indexOf(el);
-      el.style.transitionDelay = (idx * 60) + 'ms';
+/* ── ENVIAR ──────────────────────────────────────────────── */
+function submitSurvey() {
+  var b4 = document.getElementById('block4');
+  if (b4) b4.classList.add('hidden');
+ 
+  var thanks = document.getElementById('blockThanks');
+  if (thanks) {
+    thanks.classList.remove('hidden');
+    setTimeout(function () {
+      var top = thanks.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 30);
+  }
+ 
+  var bar = document.getElementById('surveyBar');
+  var lbl = document.getElementById('spLabel');
+  var pct = document.getElementById('spPct');
+  if (bar) bar.style.width = '100%';
+  if (lbl) lbl.textContent = 'Concluído!';
+  if (pct) pct.textContent = '100%';
+ 
+  document.querySelectorAll('.sp-step').forEach(function (dot) {
+    dot.classList.remove('active');
+    dot.classList.add('done');
+  });
+ 
+  showToast('✅ Pesquisa enviada! Obrigado pela participação.');
+}
+ 
+/* ── COMPARTILHAR ────────────────────────────────────────── */
+function shareWhatsApp() {
+  var text = encodeURIComponent('Participei da pesquisa do projeto Agrinho sobre o agro e o futuro sustentável! Responda também: ' + window.location.href);
+  window.open('https://wa.me/?text=' + text, '_blank');
+}
+ 
+function shareLink() {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(window.location.href).then(function () {
+      showToast('🔗 Link copiado!');
     });
+  } else {
+    showToast('Copie o link da barra de endereço.');
+  }
+}
  
-    if ('IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function (entries) {
+/* ── TOAST ───────────────────────────────────────────────── */
+function showToast(msg) {
+  var toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 3000);
+}
+ 
+/* ── TUDO NO DOM PRONTO ──────────────────────────────────── */
+window.addEventListener('DOMContentLoaded', function () {
+ 
+  /* Hamburger */
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function () {
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { mobileMenu.classList.remove('open'); });
+    });
+  }
+ 
+  /* Radio / Checkbox */
+  document.querySelectorAll('.qopt').forEach(function (opt) {
+    opt.addEventListener('click', function (e) {
+      var input = opt.querySelector('input');
+      if (!input) return;
+ 
+      if (input.type === 'radio') {
+        document.querySelectorAll('input[name="' + input.name + '"]').forEach(function (inp) {
+          var p = inp.closest('.qopt');
+          if (p) p.classList.remove('selected');
+        });
+        input.checked = true;
+        opt.classList.add('selected');
+ 
+      } else {
+        if (e.target !== input) input.checked = !input.checked;
+        opt.classList.toggle('selected', input.checked);
+ 
+        var limits = { q4: 2, q13: 3 };
+        var limit = limits[input.name];
+        if (limit) {
+          var total = document.querySelectorAll('input[name="' + input.name + '"]:checked').length;
+          if (total > limit) {
+            input.checked = false;
+            opt.classList.remove('selected');
+            showToast('Selecione no máximo ' + limit + ' opções.');
+          }
+        }
+      }
+    });
+  });
+ 
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+      }
+    });
+  });
+ 
+  /* IntersectionObserver para reveal e barras */
+  if ('IntersectionObserver' in window) {
+ 
+    /* Reveal geral */
+    var revObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+ 
+    document.querySelectorAll('.reveal').forEach(function (el) { revObs.observe(el); });
+ 
+    /* Barras de prática */
+    var barObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var fill = entry.target.querySelector('.pc-fill');
+          if (fill) {
+            var pct = fill.getAttribute('data-pct') || '0';
+            setTimeout(function () { fill.style.width = pct + '%'; }, 200);
+          }
+          barObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+ 
+    document.querySelectorAll('.practice-card').forEach(function (card) { barObs.observe(card); });
+ 
+    /* Contador hero */
+    var heroBar = document.querySelector('.hero-stats-bar');
+    if (heroBar) {
+      var countObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+            entry.target.querySelectorAll('.hstat-num').forEach(function (el) {
+              var target = parseInt(el.getAttribute('data-target')) || 0;
+              var suf = el.nextElementSibling ? el.nextElementSibling.textContent : '';
+              var steps = 50; var step = 0;
+              var timer = setInterval(function () {
+                step++;
+                el.textContent = Math.round(target * step / steps);
+                if (step >= steps) clearInterval(timer);
+              }, 1600 / steps);
+            });
+            countObs.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
- 
-      animatables.forEach(function (el) { observer.observe(el); });
+      }, { threshold: 0.5 });
+      countObs.observe(heroBar);
     }
   }
  
- 
-  /* ═══════════════════════════════════════════════════════════
-     4. QUIZ INTERATIVO
-     ═══════════════════════════════════════════════════════════ */
- 
-  // Banco de perguntas
-  var questions = [
-    {
-      text: 'O que é um "crédito de carbono" no contexto do agronegócio?',
-      options: [
-        'Um empréstimo bancário para compra de maquinário agrícola',
-        'Um certificado que representa 1 tonelada de CO₂ não emitida ou capturada',
-        'Um subsídio do governo para reduzir o uso de fertilizantes',
-        'Uma pontuação de sustentabilidade dada pela Embrapa',
-      ],
-      correct: 1,
-      feedback: '✅ Correto! Um crédito de carbono equivale a 1 tonelada de CO₂ que foi evitada ou removida da atmosfera. Esse crédito pode ser vendido a empresas que precisam compensar suas emissões.',
-      wrongFeedback: '❌ Incorreto. Um crédito de carbono é um certificado que representa 1 tonelada de CO₂ que deixou de ser emitida ou foi capturada. Ele é negociado em mercados voluntários ou regulados.',
-    },
-    {
-      text: 'No Sistema de Plantio Direto (SPD), qual é o principal benefício ambiental em relação ao carbono?',
-      options: [
-        'Aumenta a emissão de metano para fertilizar o solo naturalmente',
-        'Elimina a necessidade de irrigação nos campos',
-        'Evita o revolvimento do solo, impedindo que o carbono nele armazenado seja liberado para a atmosfera',
-        'Permite o uso de mais defensivos químicos com menor impacto',
-      ],
-      correct: 2,
-      feedback: '✅ Exato! Ao não arar o solo, o SPD preserva a matéria orgânica e o carbono estocado. O solo torna-se um reservatório de carbono em vez de uma fonte emissora.',
-      wrongFeedback: '❌ Incorreto. O benefício climático do Plantio Direto é que, ao não revolver o solo, o carbono presente na matéria orgânica permanece preso ali.',
-    },
-    {
-      text: 'O sistema ILPF é considerado uma inovação genuinamente brasileira. O que significa a sigla?',
-      options: [
-        'Irrigação, Lavoura, Produção e Fertilidade',
-        'Integração Lavoura-Pecuária-Floresta',
-        'Instituto de Licenciamento Para Fronteiras',
-        'Índice de Lucro por Fazenda',
-      ],
-      correct: 1,
-      feedback: '✅ Perfeito! ILPF = Integração Lavoura-Pecuária-Floresta. Grãos, gado e árvores convivem no mesmo espaço. As árvores absorvem o CO₂ do rebanho e geram renda com madeira futura.',
-      wrongFeedback: '❌ ILPF significa Integração Lavoura-Pecuária-Floresta. É um modelo que combina cultivo de grãos, criação de animais e plantio de árvores na mesma área.',
-    },
-    {
-      text: 'Qual tecnologia digital é usada para estimar com precisão quanto carbono uma propriedade rural está sequestrando?',
-      options: [
-        'Aplicativos de previsão do tempo agrícola',
-        'Drones e imagens de satélite que calculam a biomassa da vegetação',
-        'Sistemas de rastreamento de colheita via GPS',
-        'Câmeras de segurança com IA para monitorar o gado',
-      ],
-      correct: 1,
-      feedback: '✅ Correto! Drones e satélites mapeiam a saúde da vegetação. Com esses dados, algoritmos calculam a biomassa e quanto carbono aquela área está retendo — dado essencial para certificação.',
-      wrongFeedback: '❌ A tecnologia correta são drones e imagens de satélite. Eles calculam a biomassa da vegetação para estimar o carbono sequestrado para fins de certificação.',
-    },
-    {
-      text: 'Por que a substituição de fertilizantes nitrogenados sintéticos por Fixação Biológica de Nitrogênio (FBN) reduz as emissões de GEE?',
-      options: [
-        'Porque a FBN usa energia solar para funcionar, eliminando máquinas',
-        'Porque fertilizantes nitrogenados sintéticos liberam óxido nitroso (N₂O), um GEE cerca de 300× mais potente que o CO₂',
-        'Porque a FBN elimina totalmente a necessidade de colheita mecanizada',
-        'Porque as bactérias da FBN produzem oxigênio puro no solo',
-      ],
-      correct: 1,
-      feedback: '✅ Excelente! O N₂O liberado por fertilizantes nitrogenados tem potencial de aquecimento global cerca de 300 vezes maior que o CO₂. A FBN usa bactérias naturais, eliminando essa fonte de emissão.',
-      wrongFeedback: '❌ A resposta correta envolve o N₂O. Fertilizantes nitrogenados liberam óxido nitroso, um gás de efeito estufa cerca de 300× mais potente que o CO₂.',
-    },
-  ];
- 
-  // Estado
-  var quizState = {
-    current:  0,
-    score:    0,
-    answered: false
-  };
- 
-  // Elementos do DOM
-  var screenStart    = document.getElementById('quizStart');
-  var screenQuestion = document.getElementById('quizQuestion');
-  var screenResult   = document.getElementById('quizResult');
- 
-  var elProgressFill  = document.getElementById('progressFill');
-  var elProgressText  = document.getElementById('progressText');
-  var elQuestionText  = document.getElementById('questionText');
-  var elOptionsList   = document.getElementById('optionsList');
-  var elFeedback      = document.getElementById('quizFeedback');
-  var elNextBtn       = document.getElementById('nextBtn');
-  var elStartBtn      = document.getElementById('startQuizBtn');
-  var elRetryBtn      = document.getElementById('retryBtn');
-  var elScoreArc      = document.getElementById('scoreArc');
-  var elScoreLabel    = document.getElementById('scoreLabel');
-  var elResultTitle   = document.getElementById('resultTitle');
-  var elResultMessage = document.getElementById('resultMessage');
- 
-  // Verifica se os elementos existem antes de continuar
-  if (!elStartBtn) {
-    console.warn('Quiz: elemento startQuizBtn não encontrado.');
-    return;
-  }
- 
-  function showScreen(name) {
-    var screens = { start: screenStart, question: screenQuestion, result: screenResult };
-    Object.keys(screens).forEach(function (key) {
-      var el = screens[key];
-      if (!el) return;
-      if (key === name) {
-        el.classList.remove('quiz-screen--hidden');
-      } else {
-        el.classList.add('quiz-screen--hidden');
-      }
-    });
-  }
- 
-  function renderQuestion(idx) {
-    var q = questions[idx];
-    quizState.answered = false;
- 
-    // Progresso
-    var pct = (idx / questions.length) * 100;
-    if (elProgressFill) elProgressFill.style.width = pct + '%';
-    if (elProgressText) elProgressText.textContent = 'Pergunta ' + (idx + 1) + ' de ' + questions.length;
- 
-    // Texto da pergunta
-    if (elQuestionText) elQuestionText.textContent = q.text;
- 
-    // Opções
-    if (elOptionsList) {
-      elOptionsList.innerHTML = '';
-      var letters = ['A', 'B', 'C', 'D'];
- 
-      q.options.forEach(function (optText, i) {
-        var li  = document.createElement('li');
-        var btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.dataset.index = String(i);
-        btn.innerHTML =
-          '<span class="option-marker" aria-hidden="true">' + letters[i] + '</span>' +
-          '<span>' + optText + '</span>';
- 
-        btn.addEventListener('click', function () {
-          handleAnswer(i);
-        });
- 
-        li.appendChild(btn);
-        elOptionsList.appendChild(li);
-      });
-    }
- 
-    // Reseta feedback e botão
-    if (elFeedback) {
-      elFeedback.className = 'quiz-feedback';
-      elFeedback.textContent = '';
-    }
-    if (elNextBtn) elNextBtn.style.display = 'none';
- 
-    showScreen('question');
-  }
- 
-  function handleAnswer(chosenIdx) {
-    if (quizState.answered) return;
-    quizState.answered = true;
- 
-    var q = questions[quizState.current];
-    var correct = (chosenIdx === q.correct);
- 
-    if (correct) quizState.score++;
- 
-    // Marca os botões
-    var allBtns = elOptionsList ? elOptionsList.querySelectorAll('.option-btn') : [];
-    allBtns.forEach(function (btn, i) {
-      btn.disabled = true;
-      if (i === q.correct) {
-        btn.classList.add('correct');
-        var marker = btn.querySelector('.option-marker');
-        if (marker) marker.textContent = '✓';
-      } else if (i === chosenIdx && !correct) {
-        btn.classList.add('wrong');
-        var marker = btn.querySelector('.option-marker');
-        if (marker) marker.textContent = '✗';
-      }
-    });
- 
-    // Feedback
-    if (elFeedback) {
-      elFeedback.textContent = correct ? q.feedback : q.wrongFeedback;
-      elFeedback.className = 'quiz-feedback visible ' + (correct ? 'feedback-correct' : 'feedback-wrong');
-    }
- 
-    // Botão próxima
-    if (elNextBtn) {
-      elNextBtn.style.display = 'block';
-      setTimeout(function () { elNextBtn.focus(); }, 80);
-    }
-  }
- 
-  function advanceQuiz() {
-    quizState.current++;
-    if (quizState.current < questions.length) {
-      renderQuestion(quizState.current);
-    } else {
-      showResult();
-    }
-  }
- 
-  function showResult() {
-    var total = questions.length;
-    var score = quizState.score;
-    var pct   = score / total;
- 
-    if (elProgressFill) elProgressFill.style.width = '100%';
-    if (elScoreLabel)   elScoreLabel.textContent = score + '/' + total;
- 
-    // Arco SVG
-    if (elScoreArc) {
-      var circ   = 314;
-      var offset = circ - circ * pct;
-      setTimeout(function () {
-        elScoreArc.style.transition = 'stroke-dashoffset 1s ease';
-        elScoreArc.style.strokeDashoffset = String(offset);
-      }, 120);
-    }
- 
-    // Mensagem de resultado
-    var title, msg;
-    if (score === 5) {
-      title = '🌳 Especialista em Campo Sustentável!';
-      msg   = 'Incrível! Você domina os conceitos de descarbonização no agronegócio. Está pronto para fazer parte dessa revolução verde!';
-    } else if (score === 4) {
-      title = '🌿 Quase lá, futuro agrônomo!';
-      msg   = 'Ótimo desempenho! Você já conhece bem o tema. Revise as questões que errou e repita o quiz!';
-    } else if (score === 3) {
-      title = '🌱 Bom começo, continue aprendendo!';
-      msg   = 'Você está no caminho certo. Leia as seções sobre Mercado de Carbono e Práticas ABC+ para reforçar seu conhecimento.';
-    } else {
-      title = '🪴 O aprendizado está começando!';
-      msg   = 'Não desanime! Explore todas as seções do site e tente o quiz novamente. Você vai melhorar!';
-    }
- 
-    if (elResultTitle)   elResultTitle.textContent   = title;
-    if (elResultMessage) elResultMessage.textContent = msg;
- 
-    showScreen('result');
-  }
- 
-  function resetQuiz() {
-    quizState = { current: 0, score: 0, answered: false };
-    if (elProgressFill) elProgressFill.style.width = '0%';
-    if (elScoreArc) {
-      elScoreArc.style.transition = 'none';
-      elScoreArc.style.strokeDashoffset = '314';
-    }
-    renderQuestion(0);
-  }
- 
-  // Eventos dos botões
-  elStartBtn.addEventListener('click', function () {
-    renderQuestion(0);
+  /* Stagger cards */
+  document.querySelectorAll('.practices-grid .practice-card').forEach(function (c, i) {
+    c.style.transitionDelay = (i * 0.08) + 's';
+  });
+  document.querySelectorAll('.fontes-grid .fcard').forEach(function (c, i) {
+    c.style.transitionDelay = (i * 0.06) + 's';
   });
  
-  elNextBtn && elNextBtn.addEventListener('click', advanceQuiz);
-  elRetryBtn && elRetryBtn.addEventListener('click', resetQuiz);
- 
-}); // fim DOMContentLoaded
+  /* Dots iniciais */
+  document.querySelectorAll('.sp-step').forEach(function (dot) {
+    if (parseInt(dot.getAttribute('data-block')) === 1) dot.classList.add('active');
+  });
+});
  
