@@ -1,662 +1,438 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agrinho 2025 — O Agro e o Futuro Sustentável</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agro Forte, Futuro Sustentável | Agrinho 2026</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Estilos externos -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
- 
-<!-- NAV -->
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#hero" class="nav-logo">
-      <span class="logo-mark">A</span>
-      <span class="logo-text">Agrinho <em>2025</em></span>
-    </a>
+
+  <!-- ═══════════════════════════════════════
+       NAV
+  ═══════════════════════════════════════ -->
+  <nav>
+    <span class="nav-logo">🌱 Agrinho 2026</span>
     <ul class="nav-links">
-      <li><a href="#sobre">O Projeto</a></li>
-      <li><a href="#dados">Dados</a></li>
-      <li><a href="#carbono">Mercado de Carbono</a></li>
-      <li><a href="#pesquisa" class="nav-cta">Participar da Pesquisa</a></li>
+      <li><a href="#mercado">Mercado de Carbono</a></li>
+      <li><a href="#agro">Agro Sustentável</a></li>
+      <li><a href="#brasil">Brasil</a></li>
+      <li><a href="#como">Como Funciona</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#sobre">O Projeto</a>
-    <a href="#dados">Dados</a>
-    <a href="#carbono">Mercado de Carbono</a>
-    <a href="#pesquisa">Participar</a>
-  </div>
-</nav>
- 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-img-wrap">
-    <img
-      src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&q=80&fit=crop"
-      alt="Campo agrícola ao amanhecer"
-      class="hero-img"
-    >
-    <div class="hero-overlay"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-badge">Competição Agrinho 2026</div>
-    <h1 class="hero-title">O Agro e a<br><em>Construção</em> de um<br>Futuro Sustentável</h1>
-    <p class="hero-sub">O campo que alimenta o mundo pode também ser o campo que o resfria. Participe da nossa pesquisa e contribua para mapear a percepção da sociedade sobre o agronegócio sustentável.</p>
-    <div class="hero-actions">
-      <a href="#pesquisa" class="btn-primary">Participar da Pesquisa</a>
-      <a href="#sobre" class="btn-ghost">Conhecer o projeto ↓</a>
-    </div>
-  </div>
-  <div class="hero-stats-bar">
-    <div class="hstat"><span class="hstat-num" data-target="25">0</span><span class="hstat-suf">%</span><span class="hstat-label">do PIB nacional</span></div>
-    <div class="hstat-sep"></div>
-    <div class="hstat"><span class="hstat-num" data-target="150">0</span><span class="hstat-suf">+</span><span class="hstat-label">países abastecidos</span></div>
-    <div class="hstat-sep"></div>
-    <div class="hstat"><span class="hstat-num" data-target="66">0</span><span class="hstat-suf">%</span><span class="hstat-label">vegetação nativa preservada</span></div>
-    <div class="hstat-sep"></div>
-    <div class="hstat"><span class="hstat-num" data-target="22">0</span><span class="hstat-suf">%</span><span class="hstat-label">das emissões globais de GEE vêm do agro</span></div>
-  </div>
-</section>
- 
-<!-- SOBRE -->
-<section class="section" id="sobre">
-  <div class="container">
-    <div class="two-col">
-      <div class="col-text reveal">
-        <div class="section-label">O Projeto</div>
-        <h2 class="section-title">Por que o agro é central nessa conversa?</h2>
-        <p>O agronegócio brasileiro vive um momento paradoxal: é o setor que mais cresce economicamente e, ao mesmo tempo, o que carrega maior pressão por transformação ambiental. A boa notícia é que sustentabilidade e produtividade deixaram de ser opostos.</p>
-        <p>Tecnologias como o <strong>plantio direto</strong>, a <strong>Integração Lavoura-Pecuária-Floresta (ILPF)</strong> e os <strong>bioinsumos</strong> já provam que é possível produzir mais, emitir menos carbono e gerar novas fontes de renda — como o emergente mercado de créditos de carbono.</p>
-        <p>Esta pesquisa, parte do projeto Agrinho, mapeia como estudantes, educadores e cidadãos percebem esse processo de transformação. Cada resposta contribui para um retrato real da consciência socioambiental brasileira sobre o campo.</p>
-        <a href="#pesquisa" class="btn-primary" style="display:inline-block;margin-top:1.5rem;">Responder a pesquisa →</a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section id="hero">
+    <!-- container das bolhas geradas pelo JS -->
+    <div id="bubbles"></div>
+
+    <span class="hero-eyebrow">🏆 Concurso Agrinho 2026 — Paraná</span>
+
+    <h1 class="hero-title">
+      Agro Forte,<br />
+      <span class="destaque">Futuro Sustentável</span>
+    </h1>
+
+    <p class="hero-sub">
+      Equilíbrio entre produção e meio ambiente:<br />
+      como o mercado de carbono está transformando o agronegócio
+      brasileiro em protagonista da descarbonização global.
+    </p>
+
+    <div class="counter-box">
+      <div class="counter-item">
+        <div class="counter-number" id="cnt1">0</div>
+        <div class="counter-label">Créditos de Carbono no Agro BR (mi)</div>
       </div>
-      <div class="col-img reveal">
-        <div class="img-stack">
-          <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=700&q=80&fit=crop" alt="Agricultura sustentável" class="img-main">
-          <div class="img-badge">
-            <strong>Plano ABC+</strong>
-            <span>1,1 bilhão de t CO₂ a mitigar até 2030</span>
-          </div>
+      <div class="counter-item">
+        <div class="counter-number" id="cnt2">0</div>
+        <div class="counter-label">% do PIB global em ETS</div>
+      </div>
+      <div class="counter-item">
+        <div class="counter-number" id="cnt3">0</div>
+        <div class="counter-label">Meta de Neutralidade Brasil</div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">EXPLORE</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       INTRO
+  ═══════════════════════════════════════ -->
+  <section id="intro">
+    <div class="container">
+      <div>
+        <p class="section-label">O Desafio do Nosso Tempo</p>
+        <h2 class="section-title">Produzir mais com menos impacto</h2>
+        <p class="section-body">
+          O Brasil é uma das maiores potências agrícolas do planeta.
+          Nosso campo alimenta mais de 1 bilhão de pessoas no mundo.
+          Hoje, esse mesmo campo tem a chance de liderar a maior
+          transformação ambiental do século: a descarbonização da
+          economia.<br /><br />
+          O mercado de carbono chegou para mostrar que ser verde é
+          também ser rentável — e o agronegócio brasileiro está na
+          linha de frente.
+        </p>
+      </div>
+
+      <div class="icon-grid">
+        <div class="icon-card">
+          <div class="icon">🌾</div>
+          <h4>Agropecuária</h4>
+          <p>Maior setor em potencial de geração de créditos no Brasil</p>
+        </div>
+        <div class="icon-card">
+          <div class="icon">🌳</div>
+          <h4>Reflorestamento</h4>
+          <p>Reservas legais e APPs viram ativos financeiros sustentáveis</p>
+        </div>
+        <div class="icon-card">
+          <div class="icon">♻️</div>
+          <h4>Economia Circular</h4>
+          <p>Resíduos agrícolas transformados em energia e renda</p>
+        </div>
+        <div class="icon-card">
+          <div class="icon">📈</div>
+          <h4>Renda Extra</h4>
+          <p>Produtor rural monetiza boas práticas ambientais</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
- 
-<!-- PRÁTICAS -->
-<section class="section section-alt" id="dados">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Descarbonização no Campo</div>
-      <h2 class="section-title">Práticas que já estão<br>mudando o campo</h2>
-      <p class="section-sub">Tecnologias de baixo carbono não são futuro — são realidade presente no agro brasileiro.</p>
-    </div>
- 
-    <div class="practices-grid">
-      <div class="practice-card reveal">
-        <div class="pc-img-wrap">
-          <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&q=80&fit=crop" alt="Plantio direto">
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MERCADO DE CARBONO
+  ═══════════════════════════════════════ -->
+  <section id="mercado">
+    <div class="container">
+
+      <div class="sticky-text reveal">
+        <p class="section-label">Entenda o Conceito</p>
+        <h2 class="section-title">O que é o Mercado de Carbono?</h2>
+        <p class="section-body">
+          O mercado de carbono é um mecanismo econômico criado para
+          incentivar a redução das emissões de gases de efeito estufa
+          (GEE). A unidade negociada é a tonelada de CO₂ equivalente
+          (tCO₂e) — cada crédito representa uma tonelada de carbono
+          que foi evitada ou removida da atmosfera.<br /><br />
+          Empresas que emitem menos do que o permitido podem
+          <strong>vender</strong> esse resultado positivo. Empresas
+          que emitem mais podem <strong>comprar</strong> créditos para
+          compensar. Assim, o mercado cria um incentivo financeiro
+          direto para quem cuida do meio ambiente.
+        </p>
+      </div>
+
+      <div class="card-list">
+        <div class="card reveal">
+          <span class="tag">Mercado Regulado (ETS)</span>
+          <h3>Direitos de Emissão</h3>
+          <p>O governo define um limite máximo de emissões e distribui
+          "permissões" entre as empresas. Quem ultrapassar o limite
+          precisa comprar permissões; quem economizar pode vendê-las.
+          A União Europeia criou o primeiro ETS em 2005, e hoje
+          existem 34 sistemas no mundo cobrindo 17% das emissões
+          globais.</p>
         </div>
-        <div class="pc-body">
-          <span class="pc-tag">Solo</span>
+
+        <div class="card dourado reveal">
+          <span class="tag">Mercado Voluntário</span>
+          <h3>Créditos de Carbono</h3>
+          <p>Empresas e pessoas físicas escolhem voluntariamente
+          compensar sua pegada de carbono comprando créditos
+          certificados. Projetos de reflorestamento, energia renovável
+          e agricultura sustentável geram esses créditos. O volume de
+          créditos cresceu 116% entre 2019 e 2021.</p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Meta Nacional</span>
+          <h3>Neutralidade de Carbono até 2050</h3>
+          <p>A meta do Brasil é alcançar a neutralidade de carbono até
+          2050 — compensar toda emissão com ações como reflorestamento
+          e eficiência energética. O Sistema Brasileiro de Comércio de
+          Emissões (Lei 15.042/2024) foi aprovado e está em
+          regulamentação pelo Executivo.</p>
+        </div>
+
+        <div class="card reveal">
+          <span class="tag">Preço do Carbono</span>
+          <h3>Quanto vale um crédito?</h3>
+          <p>No mercado voluntário, os preços variam de menos de
+          US$ 1 a mais de US$ 20 por tonelada, dependendo da
+          qualidade e dos cobenefícios do projeto. No EU ETS, o
+          preço chegou a superar €90/tonelada em 2022. A tendência
+          global é de alta.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       AGRO SUSTENTÁVEL
+  ═══════════════════════════════════════ -->
+  <section id="agro">
+    <div class="container">
+
+      <div class="reveal">
+        <p class="section-label">Protagonismo Verde</p>
+        <h2 class="section-title">O Agro como Motor da Sustentabilidade</h2>
+        <p class="section-body">
+          Longe de ser vilão ambiental, o agronegócio brasileiro é
+          hoje um dos maiores geradores de créditos de carbono do
+          mundo. Práticas como o plantio direto, a integração
+          lavoura-pecuária-floresta (iLPF), a recuperação de pastagens
+          degradadas e o uso de biocombustíveis colocam o produtor
+          rural como agente central da descarbonização.
+        </p>
+      </div>
+
+      <div class="agro-grid">
+        <div class="agro-card reveal">
+          <div class="num">01</div>
           <h3>Plantio Direto</h3>
-          <p>Elimina o revolvimento do solo, mantendo carbono orgânico sequestrado. O Brasil possui <strong>35 milhões de hectares</strong> cultivados nesse sistema — o maior do mundo.</p>
-          <div class="pc-stat">
-            <div class="pc-bar"><div class="pc-fill" data-pct="82"></div></div>
-            <span>82% de adoção no Sul do Brasil</span>
-          </div>
+          <p>O Brasil tem 33 milhões de hectares em plantio direto —
+          um dos maiores do mundo. A técnica mantém o carbono no solo,
+          reduz erosão e melhora a produtividade sem desmatar.</p>
         </div>
-      </div>
- 
-      <div class="practice-card reveal">
-        <div class="pc-img-wrap">
-          <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&q=80&fit=crop" alt="ILPF integração lavoura">
+        <div class="agro-card reveal">
+          <div class="num">02</div>
+          <h3>iLPF — Integração</h3>
+          <p>A integração entre lavoura, pecuária e floresta combina
+          produção e preservação no mesmo espaço, gerando créditos de
+          carbono enquanto aumenta a renda do produtor.</p>
         </div>
-        <div class="pc-body">
-          <span class="pc-tag">Integração</span>
-          <h3>ILPF</h3>
-          <p>Integra lavoura, pecuária e floresta na mesma área. Aumenta produtividade em até <strong>40%</strong> sem abrir novas terras e sequestra carbono nas árvores.</p>
-          <div class="pc-stat">
-            <div class="pc-bar"><div class="pc-fill" data-pct="55"></div></div>
-            <span>+55% de produtividade vs. monocultura</span>
-          </div>
+        <div class="agro-card reveal">
+          <div class="num">03</div>
+          <h3>Bioenergia</h3>
+          <p>A cana-de-açúcar brasileira e o etanol colocam o Brasil
+          no topo global da bioenergia limpa. O setor já substitui
+          emissões equivalentes a milhões de carros a combustão por
+          ano.</p>
         </div>
-      </div>
- 
-      <div class="practice-card reveal">
-        <div class="pc-img-wrap">
-          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80&fit=crop" alt="Bioinsumos e agricultura">
+        <div class="agro-card reveal">
+          <div class="num">04</div>
+          <h3>Reserva Legal</h3>
+          <p>As áreas de preservação obrigatória nas propriedades
+          rurais tornam-se ativos ambientais. Agricultores que
+          preservam mais do que o exigido podem vender créditos no
+          mercado voluntário.</p>
         </div>
-        <div class="pc-body">
-          <span class="pc-tag">Insumos</span>
-          <h3>Bioinsumos</h3>
-          <p>Substituem fertilizantes sintéticos. Reduzem emissões de N₂O e podem cortar <strong>30% dos custos</strong> com adubação química convencional.</p>
-          <div class="pc-stat">
-            <div class="pc-bar"><div class="pc-fill" data-pct="30"></div></div>
-            <span>Crescimento de 30% ao ano no Brasil</span>
-          </div>
-        </div>
-      </div>
- 
-      <div class="practice-card reveal">
-        <div class="pc-img-wrap">
-          <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=80&fit=crop" alt="Pastagens e pecuária sustentável">
-        </div>
-        <div class="pc-body">
-          <span class="pc-tag">Pastagens</span>
+        <div class="agro-card reveal">
+          <div class="num">05</div>
           <h3>Recuperação de Pastagens</h3>
-          <p>O Brasil tem <strong>40 milhões de hectares</strong> degradados. Cada hectare recuperado sequestra até 2 t de CO₂/ano e eleva a produção pecuária.</p>
-          <div class="pc-stat">
-            <div class="pc-bar"><div class="pc-fill" data-pct="40"></div></div>
-            <span>Potencial de 80 Mt CO₂ capturadas/ano</span>
+          <p>O Brasil tem potencial de recuperar até 50 milhões de
+          hectares de pastagens degradadas, o que representa um dos
+          maiores estoques de sequestro de carbono do planeta.</p>
+        </div>
+        <div class="agro-card reveal">
+          <div class="num">06</div>
+          <h3>Biogás de Dejetos</h3>
+          <p>Dejetos de suínos e bovinos são convertidos em biogás,
+          gerando energia limpa e eliminando metano — um dos gases
+          mais potentes no aquecimento global. Paraná lidera nessa
+          tecnologia.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       BRASIL E A LEI
+  ═══════════════════════════════════════ -->
+  <section id="brasil">
+    <div class="container">
+      <p class="section-label">Regulamentação Nacional</p>
+      <h2 class="section-title">O Brasil e o Mercado de Carbono</h2>
+
+      <div class="brasil-layout">
+
+        <div class="stat-stack reveal">
+          <div class="stat-block">
+            <div class="big">2024</div>
+            <div class="desc">A Lei 15.042/2024 criou o Sistema
+            Brasileiro de Comércio de Emissões (SBCE), aprovada pelo
+            Congresso e sancionada no fim do ano.</div>
+          </div>
+          <div class="stat-block">
+            <div class="big">2050</div>
+            <div class="desc">Meta nacional de neutralidade de carbono
+            — compensar 100% das emissões pelo que deixou de ser
+            produzido.</div>
+          </div>
+          <div class="stat-block">
+            <div class="big">55%</div>
+            <div class="desc">Do PIB mundial já está coberto por algum
+            sistema de precificação de carbono — o Brasil se junta a
+            esse grupo.</div>
+          </div>
+          <div class="stat-block">
+            <div class="big">34</div>
+            <div class="desc">Sistemas ETS ativos no mundo, cobrindo
+            17% das emissões globais. O Brasil será o maior da América
+            Latina.</div>
           </div>
         </div>
+
+        <div class="timeline reveal">
+          <div class="tl-item">
+            <div class="tl-year">2005</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <h4>🇪🇺 EU ETS — Pioneiro Mundial</h4>
+              <p>União Europeia lança o primeiro grande mercado de
+              carbono do mundo, tornando-se referência global.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2015</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <h4>📋 Acordo de Paris</h4>
+              <p>O Brasil assina o acordo e assume compromisso de
+              reduzir emissões e alcançar neutralidade de carbono.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2021</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <h4>🌿 Boom dos Créditos Voluntários</h4>
+              <p>Emissão de créditos cresce 116% e demanda sobe 130%.
+              Agro brasileiro vira destino de investimentos.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <h4>🇧🇷 Lei 15.042/2024 Aprovada</h4>
+              <p>Congresso aprova e presidente sanciona a lei que cria
+              o Sistema Brasileiro de Comércio de Emissões.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2025+</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <h4>⚙️ Regulamentação em Curso</h4>
+              <p>Ministérios da Fazenda e do Desenvolvimento articulam
+              com a indústria as regras definitivas do mercado
+              brasileiro.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2050</div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <h4>🎯 Neutralidade de Carbono</h4>
+              <p>Meta nacional: todo CO₂ emitido compensado.
+              Agronegócio como pilar essencial desse futuro.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
-</section>
- 
-<!-- MERCADO DE CARBONO -->
-<section class="section carbono-section" id="carbono">
-  <div class="container">
-    <div class="two-col two-col-rev">
-      <div class="col-img reveal">
-        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&q=80&fit=crop" alt="Floresta e natureza" class="img-full rounded">
-        <div class="img-overlay-card">
-          <div class="ioc-value">US$ 5–30</div>
-          <div class="ioc-label">por tonelada de CO₂ sequestrado</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       COMO FUNCIONA
+  ═══════════════════════════════════════ -->
+  <section id="como">
+    <div class="container">
+
+      <div class="reveal" style="text-align:center; margin-bottom:1rem;">
+        <p class="section-label" style="display:flex; justify-content:center;">
+          Passo a Passo
+        </p>
+        <h2 class="section-title" style="text-align:center; max-width:600px; margin:0 auto;">
+          Como o produtor rural gera e vende créditos
+        </h2>
+      </div>
+
+      <div class="fluxo reveal">
+        <div class="fluxo-step">
+          <div class="fluxo-icon">🌱</div>
+          <h4>Adota Prática Sustentável</h4>
+          <p>Plantio direto, reflorestamento, biogás ou iLPF na
+          propriedade</p>
+        </div>
+        <div class="fluxo-step">
+          <div class="fluxo-icon">📊</div>
+          <h4>Mede a Redução</h4>
+          <p>Calcula a quantidade de CO₂ evitada ou sequestrada em
+          toneladas</p>
+        </div>
+        <div class="fluxo-step">
+          <div class="fluxo-icon">✅</div>
+          <h4>Certifica o Crédito</h4>
+          <p>Uma entidade certificadora independente valida e emite
+          os créditos</p>
+        </div>
+        <div class="fluxo-step">
+          <div class="fluxo-icon">💱</div>
+          <h4>Vende no Mercado</h4>
+          <p>Os créditos são negociados para empresas que precisam
+          compensar emissões</p>
+        </div>
+        <div class="fluxo-step">
+          <div class="fluxo-icon">💰</div>
+          <h4>Recebe Renda Extra</h4>
+          <p>O produtor lucra com a sustentabilidade, além da
+          produção normal</p>
         </div>
       </div>
-      <div class="col-text reveal">
-        <div class="section-label">Mercado de Carbono</div>
-        <h2 class="section-title">O campo ganha<br>por cuidar do planeta</h2>
-        <p>Um crédito de carbono representa <strong>1 tonelada de CO₂</strong> removida ou evitada. O produtor rural que adota práticas sustentáveis pode vender esses créditos a empresas que precisam compensar suas emissões.</p>
- 
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-body">
-              <strong>Adota prática sustentável</strong>
-              <span>Plantio direto, ILPF, recuperação de pastagem</span>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-body">
-              <strong>Carbono é mensurado</strong>
-              <span>Auditoria técnica e monitoramento por satélite</span>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-body">
-              <strong>Crédito é certificado</strong>
-              <span>Via Verra, Gold Standard ou SBCE (mercado regulado)</span>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-num">4</div>
-            <div class="step-body">
-              <strong>Renda adicional ao produtor</strong>
-              <span>Entre US$ 5 e US$ 30 por tonelada de CO₂ sequestrada</span>
-            </div>
-          </div>
-        </div>
- 
-        <div class="lei-tag">
-          <span>⚖️</span>
-          <div><strong>Lei nº 15.042/2024</strong> — Brasil institui o Sistema Brasileiro de Comércio de Emissões (SBCE), tornando o mercado de carbono oficial e regulado.</div>
-        </div>
-      </div>
+
     </div>
-  </div>
-</section>
- 
-<!-- GALERIA DE IMPACTO -->
-<section class="section section-alt galeria">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Impacto Visual</div>
-      <h2 class="section-title">O agro sustentável<br>em imagens</h2>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CTA / CONCLUSÃO
+  ═══════════════════════════════════════ -->
+  <section id="cta">
+    <div class="container">
+      <p class="section-label" style="color:var(--verde-menta); text-align:center;">
+        Conclusão
+      </p>
+      <h2 class="section-title" style="max-width:750px;">
+        O campo é a solução, não o problema
+      </h2>
+      <p class="section-body">
+        O agronegócio brasileiro prova todos os dias que é possível
+        produzir com eficiência e respeitar o meio ambiente. Com o
+        mercado de carbono, o produtor rural deixa de ser cobrado
+        pelo impacto ambiental e passa a ser recompensado por
+        proteger o planeta. Esse é o equilíbrio que o mundo precisa
+        — e o Brasil já está construindo.
+      </p>
+      <span class="badge">🌿 Agro Forte, Futuro Sustentável</span>
     </div>
-    <div class="gallery-grid reveal">
-      <div class="gal-item gal-tall">
-        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=600&q=80&fit=crop" alt="Campo de soja ao entardecer">
-        <div class="gal-cap">Soja — principal commodity de exportação do Brasil</div>
-      </div>
-      <div class="gal-item">
-        <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=600&q=80&fit=crop" alt="Tecnologia agrícola drone">
-        <div class="gal-cap">Agricultura de precisão com drones e IA</div>
-      </div>
-      <div class="gal-item">
-        <img src="https://images.unsplash.com/photo-1473973266408-ed4e27abdd47?w=600&q=80&fit=crop" alt="Floresta preservada">
-        <div class="gal-cap">66% da vegetação nativa do Brasil preservada</div>
-      </div>
-      <div class="gal-item gal-wide">
-        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=900&q=80&fit=crop" alt="Painéis solares em propriedade rural">
-        <div class="gal-cap">Energia solar — renovável e acessível para o produtor rural</div>
-      </div>
-    </div>
-  </div>
-</section>
- 
-<!-- PESQUISA -->
-<section class="section pesquisa-section" id="pesquisa">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Pesquisa de Percepção</div>
-      <h2 class="section-title">Sua voz importa</h2>
-      <p class="section-sub">Responda as perguntas abaixo e ajude a construir um panorama real da percepção pública sobre o agronegócio sustentável. Leva menos de 5 minutos.</p>
-    </div>
- 
-    <div class="survey-wrap">
-      <!-- PROGRESSO -->
-      <div class="survey-progress">
-        <div class="sp-steps">
-          <div class="sp-step active" data-block="1"><div class="sp-dot"></div><span>Percepção Geral</span></div>
-          <div class="sp-line"></div>
-          <div class="sp-step" data-block="2"><div class="sp-dot"></div><span>Descarbonização</span></div>
-          <div class="sp-line"></div>
-          <div class="sp-step" data-block="3"><div class="sp-dot"></div><span>Mercado de Carbono</span></div>
-          <div class="sp-line"></div>
-          <div class="sp-step" data-block="4"><div class="sp-dot"></div><span>Futuro Sustentável</span></div>
-        </div>
-        <div class="sp-track"><div class="sp-fill" id="surveyBar" style="width:25%"></div></div>
-        <div class="sp-meta">
-          <span id="spLabel">Bloco 1 de 4</span>
-          <span id="spPct">25%</span>
-        </div>
-      </div>
- 
-      <!-- BLOCO 1 -->
-      <div class="sblock" id="block1">
-        <div class="sblock-head">
-          <div class="sblock-icon" style="background:#d1ebdb;">🌿</div>
-          <div>
-            <h3>Bloco 1 — Percepção Geral sobre Agro e Sustentabilidade</h3>
-            <p>5 perguntas</p>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">01</div>
-          <div class="q-txt">Qual é o seu perfil em relação ao agronegócio?</div>
-          <div class="q-opts">
-            <label class="qopt"><input type="radio" name="q1" value="a"><span>Produtor rural ou familiar do campo</span></label>
-            <label class="qopt"><input type="radio" name="q1" value="b"><span>Estudante de ciências agrárias, biologia ou áreas correlatas</span></label>
-            <label class="qopt"><input type="radio" name="q1" value="c"><span>Cidadão urbano consumidor de alimentos</span></label>
-            <label class="qopt"><input type="radio" name="q1" value="d"><span>Profissional da área ambiental ou de sustentabilidade</span></label>
-            <label class="qopt"><input type="radio" name="q1" value="e"><span>Educador ou pesquisador</span></label>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">02</div>
-          <div class="q-txt">Como você descreveria sua percepção atual sobre o papel do agronegócio brasileiro na sustentabilidade ambiental?</div>
-          <div class="q-opts">
-            <label class="qopt"><input type="radio" name="q2" value="a"><span>O agro é um dos principais agentes de degradação ambiental no Brasil.</span></label>
-            <label class="qopt"><input type="radio" name="q2" value="b"><span>O agro gera impactos negativos, mas vem evoluindo em práticas sustentáveis.</span></label>
-            <label class="qopt"><input type="radio" name="q2" value="c"><span>O agro já é majoritariamente sustentável e adota boas práticas amplamente.</span></label>
-            <label class="qopt"><input type="radio" name="q2" value="d"><span>Não tenho uma opinião formada sobre o assunto.</span></label>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">03</div>
-          <div class="q-txt">O Brasil preserva cerca de 66% de sua vegetação nativa, sendo líder mundial em biodiversidade agrícola. Esse dado muda sua percepção sobre o agro?
-            <em class="q-src">Fonte: Embrapa / MapBiomas, 2023</em>
-          </div>
-          <div class="likert-wrap">
-            <div class="likert-scale" id="lk1">
-              <button type="button" class="lk-btn" onclick="pickLikert('lk1',1)">1</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk1',2)">2</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk1',3)">3</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk1',4)">4</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk1',5)">5</button>
-            </div>
-            <div class="likert-labels"><span>Não muda nada</span><span>Muda muito</span></div>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">04</div>
-          <div class="q-txt">Quais fatores você considera mais relevantes para tornar o agronegócio sustentável? <em class="q-hint">(Selecione até 2)</em></div>
-          <div class="q-opts">
-            <label class="qopt"><input type="checkbox" name="q4" value="a"><span>Adoção de tecnologias de baixo carbono</span></label>
-            <label class="qopt"><input type="checkbox" name="q4" value="b"><span>Políticas públicas e incentivos governamentais</span></label>
-            <label class="qopt"><input type="checkbox" name="q4" value="c"><span>Educação e capacitação do produtor rural</span></label>
-            <label class="qopt"><input type="checkbox" name="q4" value="d"><span>Acesso a crédito verde e mercado de carbono</span></label>
-            <label class="qopt"><input type="checkbox" name="q4" value="e"><span>Demanda dos consumidores por produtos sustentáveis</span></label>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">05</div>
-          <div class="q-txt">Em sua opinião, qual é o maior obstáculo para que o produtor rural brasileiro adote práticas mais sustentáveis? <em class="q-hint">(Resposta livre)</em></div>
-          <textarea class="q-area" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
- 
-        <div class="sblock-nav">
-          <div></div>
-          <button type="button" class="btn-next" onclick="goBlock(2)">Próximo bloco →</button>
-        </div>
-      </div>
- 
-      <!-- BLOCO 2 -->
-      <div class="sblock hidden" id="block2">
-        <div class="sblock-head">
-          <div class="sblock-icon" style="background:#d0d5ce;">🌾</div>
-          <div>
-            <h3>Bloco 2 — Descarbonização no Campo</h3>
-            <p>5 perguntas · práticas agrícolas de baixo carbono</p>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">06</div>
-          <div class="q-txt">Você já conhecia o conceito de "descarbonização" aplicado ao campo?
-            <em class="q-src">Reduzir emissões de CO₂ e outros gases nas atividades agrícolas e pecuárias.</em>
-          </div>
-          <div class="q-opts">
-            <label class="qopt"><input type="radio" name="q6" value="a"><span>Sim, conheço bem e sei como funciona na prática.</span></label>
-            <label class="qopt"><input type="radio" name="q6" value="b"><span>Já ouvi falar, mas entendo superficialmente.</span></label>
-            <label class="qopt"><input type="radio" name="q6" value="c"><span>Não conhecia antes de acessar este site.</span></label>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">07</div>
-          <div class="q-txt">Das práticas abaixo, quais você acredita ter maior potencial de reduzir as emissões de carbono na agricultura brasileira? <em class="q-hint">(Selecione todas que considerar relevantes)</em></div>
-          <div class="q-opts">
-            <label class="qopt"><input type="checkbox" name="q7" value="a"><span>Plantio direto — menor revolvimento do solo, mais carbono retido</span></label>
-            <label class="qopt"><input type="checkbox" name="q7" value="b"><span>ILPF — Integração Lavoura-Pecuária-Floresta</span></label>
-            <label class="qopt"><input type="checkbox" name="q7" value="c"><span>Uso de bioinsumos (biofertilizantes, biopesticidas)</span></label>
-            <label class="qopt"><input type="checkbox" name="q7" value="d"><span>Manejo sustentável de pastagens degradadas</span></label>
-            <label class="qopt"><input type="checkbox" name="q7" value="e"><span>Energia renovável em propriedades rurais (solar, biogás)</span></label>
-            <label class="qopt"><input type="checkbox" name="q7" value="f"><span>Agricultura de precisão com uso de sensores e drones</span></label>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">08</div>
-          <div class="q-txt">O Plano ABC+ prevê mitigar até 1,1 bilhão de toneladas de CO₂ até 2030. Você acredita que esse objetivo é alcançável?
-            <em class="q-src">Fonte: Ministério da Agricultura, Pecuária e Abastecimento (MAPA), 2023</em>
-          </div>
-          <div class="likert-wrap">
-            <div class="likert-scale" id="lk2">
-              <button type="button" class="lk-btn" onclick="pickLikert('lk2',1)">1</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk2',2)">2</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk2',3)">3</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk2',4)">4</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk2',5)">5</button>
-            </div>
-            <div class="likert-labels"><span>Muito improvável</span><span>Muito provável</span></div>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">09</div>
-          <div class="q-txt">Você acredita que práticas de descarbonização representam custo ou oportunidade de renda para o produtor rural?</div>
-          <div class="q-opts">
-            <label class="qopt"><input type="radio" name="q9" value="a"><span>Principalmente custo — aumenta despesas sem retorno claro.</span></label>
-            <label class="qopt"><input type="radio" name="q9" value="b"><span>Custo no curto prazo, mas oportunidade no médio e longo prazo.</span></label>
-            <label class="qopt"><input type="radio" name="q9" value="c"><span>Oportunidade real — gera renda nova e reduz custos com insumos.</span></label>
-            <label class="qopt"><input type="radio" name="q9" value="d"><span>Depende do perfil da propriedade e do suporte disponível.</span></label>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">10</div>
-          <div class="q-txt">Na sua visão, o governo brasileiro apoia suficientemente a transição para uma agricultura de baixo carbono?
-            <em class="q-src">Considere políticas como o Plano ABC+, Pronaf Verde e incentivos fiscais.</em>
-          </div>
-          <div class="likert-wrap">
-            <div class="likert-scale" id="lk3">
-              <button type="button" class="lk-btn" onclick="pickLikert('lk3',1)">1</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk3',2)">2</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk3',3)">3</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk3',4)">4</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk3',5)">5</button>
-            </div>
-            <div class="likert-labels"><span>Não apoia nada</span><span>Apoia muito</span></div>
-          </div>
-        </div>
- 
-        <div class="sblock-nav">
-          <button type="button" class="btn-back" onclick="goBlock(1)">← Voltar</button>
-          <button type="button" class="btn-next" onclick="goBlock(3)">Próximo bloco →</button>
-        </div>
-      </div>
- 
-      <!-- BLOCO 3 -->
-      <div class="sblock hidden" id="block3">
-        <div class="sblock-head">
-          <div class="sblock-icon" style="background:#d1ebdb;">💱</div>
-          <div>
-            <h3>Bloco 3 — Mercado de Carbono</h3>
-            <p>5 perguntas · créditos, viabilidade e barreiras de entrada</p>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">11</div>
-          <div class="q-txt">Antes de acessar este site, qual era o seu nível de conhecimento sobre o mercado de carbono?</div>
-          <div class="q-opts">
-            <label class="qopt"><input type="radio" name="q11" value="a"><span>Nunca tinha ouvido falar.</span></label>
-            <label class="qopt"><input type="radio" name="q11" value="b"><span>Já ouvi o nome, mas não sabia o que era.</span></label>
-            <label class="qopt"><input type="radio" name="q11" value="c"><span>Tinha uma ideia geral, mas sem detalhes.</span></label>
-            <label class="qopt"><input type="radio" name="q11" value="d"><span>Conhecia bem o conceito e seu funcionamento.</span></label>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">12</div>
-          <div class="q-txt">O Brasil regulamentou seu mercado de carbono (SBCE) em 2024, tornando-se um dos maiores mercados regulados do mundo. Qual sua percepção sobre o impacto dessa regulamentação para o produtor rural?
-            <em class="q-src">Fonte: Lei nº 15.042/2024 — Sistema Brasileiro de Comércio de Emissões</em>
-          </div>
-          <div class="likert-wrap">
-            <div class="likert-scale" id="lk4">
-              <button type="button" class="lk-btn" onclick="pickLikert('lk4',1)">1</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk4',2)">2</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk4',3)">3</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk4',4)">4</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk4',5)">5</button>
-            </div>
-            <div class="likert-labels"><span>Impacto muito negativo</span><span>Impacto muito positivo</span></div>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">13</div>
-          <div class="q-txt">Quais são, na sua visão, as principais barreiras para que pequenos e médios produtores participem do mercado de carbono? <em class="q-hint">(Selecione até 3)</em></div>
-          <div class="q-opts">
-            <label class="qopt"><input type="checkbox" name="q13" value="a"><span>Falta de informação e formação técnica</span></label>
-            <label class="qopt"><input type="checkbox" name="q13" value="b"><span>Custo elevado de certificação e monitoramento</span></label>
-            <label class="qopt"><input type="checkbox" name="q13" value="c"><span>Burocracia e complexidade dos protocolos</span></label>
-            <label class="qopt"><input type="checkbox" name="q13" value="d"><span>Incerteza sobre o preço futuro dos créditos</span></label>
-            <label class="qopt"><input type="checkbox" name="q13" value="e"><span>Falta de acesso a financiamento inicial (crédito verde)</span></label>
-            <label class="qopt"><input type="checkbox" name="q13" value="f"><span>Desconfiança na confiabilidade do sistema</span></label>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">14</div>
-          <div class="q-txt">Um produtor com 500 ha de pastagem recuperada pode gerar renda adicional de R$ 50 mil a R$ 165 mil por ano com créditos de carbono, sem alterar sua produção principal. Isso muda sua visão sobre o mercado de carbono?</div>
-          <div class="likert-wrap">
-            <div class="likert-scale" id="lk5">
-              <button type="button" class="lk-btn" onclick="pickLikert('lk5',1)">1</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk5',2)">2</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk5',3)">3</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk5',4)">4</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk5',5)">5</button>
-            </div>
-            <div class="likert-labels"><span>Não muda nada</span><span>Muda completamente</span></div>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">15</div>
-          <div class="q-txt">Se você fosse um produtor rural, participaria do mercado de carbono? Justifique brevemente. <em class="q-hint">(Resposta livre)</em></div>
-          <textarea class="q-area" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
- 
-        <div class="sblock-nav">
-          <button type="button" class="btn-back" onclick="goBlock(2)">← Voltar</button>
-          <button type="button" class="btn-next" onclick="goBlock(4)">Próximo bloco →</button>
-        </div>
-      </div>
- 
-      <!-- BLOCO 4 -->
-      <div class="sblock hidden" id="block4">
-        <div class="sblock-head">
-          <div class="sblock-icon" style="background:#efece9;">🔭</div>
-          <div>
-            <h3>Bloco 4 — O Futuro Sustentável</h3>
-            <p>5 perguntas · expectativas e impacto econômico-ambiental</p>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">16</div>
-          <div class="q-txt">Em que medida você acredita que um agro mais sustentável pode gerar crescimento econômico para o Brasil?</div>
-          <div class="likert-wrap">
-            <div class="likert-scale" id="lk6">
-              <button type="button" class="lk-btn" onclick="pickLikert('lk6',1)">1</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk6',2)">2</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk6',3)">3</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk6',4)">4</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk6',5)">5</button>
-            </div>
-            <div class="likert-labels"><span>Não gera crescimento</span><span>Gera muito crescimento</span></div>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">17</div>
-          <div class="q-txt">Qual cenário você consideraria o mais transformador para o agro brasileiro nos próximos 10 anos?</div>
-          <div class="q-opts">
-            <label class="qopt"><input type="radio" name="q17" value="a"><span>O Brasil se tornar referência global em alimentos sustentáveis com rastreabilidade certificada.</span></label>
-            <label class="qopt"><input type="radio" name="q17" value="b"><span>O mercado de carbono agrícola movimentar mais de R$ 50 bilhões por ano, gerando renda ao campo.</span></label>
-            <label class="qopt"><input type="radio" name="q17" value="c"><span>A agricultura de precisão e a IA reduzirem em 40% o uso de agroquímicos até 2035.</span></label>
-            <label class="qopt"><input type="radio" name="q17" value="d"><span>A recuperação de 15 milhões de hectares de pastagens degradadas, ampliando sequestro de carbono.</span></label>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">18</div>
-          <div class="q-txt">Você acredita que as novas gerações de agricultores têm maior abertura para adotar práticas sustentáveis do que as gerações anteriores?
-            <em class="q-src">71% dos produtores com menos de 35 anos consideram sustentabilidade muito importante. — Embrapa, 2023</em>
-          </div>
-          <div class="likert-wrap">
-            <div class="likert-scale" id="lk7">
-              <button type="button" class="lk-btn" onclick="pickLikert('lk7',1)">1</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk7',2)">2</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk7',3)">3</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk7',4)">4</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk7',5)">5</button>
-            </div>
-            <div class="likert-labels"><span>Discordo totalmente</span><span>Concordo totalmente</span></div>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">19</div>
-          <div class="q-txt">Como você avalia a importância da educação ambiental nas escolas para a construção de um agronegócio mais sustentável no futuro?</div>
-          <div class="likert-wrap">
-            <div class="likert-scale" id="lk8">
-              <button type="button" class="lk-btn" onclick="pickLikert('lk8',1)">1</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk8',2)">2</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk8',3)">3</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk8',4)">4</button>
-              <button type="button" class="lk-btn" onclick="pickLikert('lk8',5)">5</button>
-            </div>
-            <div class="likert-labels"><span>Nada importante</span><span>Muito importante</span></div>
-          </div>
-        </div>
- 
-        <div class="q">
-          <div class="q-n">20</div>
-          <div class="q-txt">Para você, qual é a imagem que o agro brasileiro deveria projetar ao mundo até 2030? <em class="q-hint">(Resposta livre)</em></div>
-          <textarea class="q-area" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
- 
-        <div class="sblock-nav">
-          <button type="button" class="btn-back" onclick="goBlock(3)">← Voltar</button>
-          <button type="button" class="btn-submit" onclick="submitSurvey()">Enviar pesquisa 🌱</button>
-        </div>
-      </div>
- 
-      <!-- AGRADECIMENTO -->
-      <div class="sblock sblock-thanks hidden" id="blockThanks">
-        <div class="thanks-icon">✅</div>
-        <h3>Obrigado pela sua participação!</h3>
-        <p>Sua resposta faz parte de uma pesquisa real que apoia o projeto Agrinho. Cada opinião ajuda a construir um retrato da consciência socioambiental brasileira sobre o campo.</p>
-        <div class="thanks-grid">
-          <div class="tcard"><div class="tcard-num">1,1 bi t</div><div class="tcard-lbl">de CO₂ a mitigar pelo Plano ABC+ até 2030</div></div>
-          <div class="tcard"><div class="tcard-num">R$ 60bi</div><div class="tcard-lbl">potencial do mercado de carbono agrícola até 2030</div></div>
-          <div class="tcard"><div class="tcard-num">71%</div><div class="tcard-lbl">dos jovens produtores priorizam sustentabilidade</div></div>
-        </div>
-        <div class="thanks-share">
-          <p>Compartilhe e convide mais pessoas:</p>
-          <div class="share-btns">
-            <button class="sbtn" onclick="shareWhatsApp()">Compartilhar no WhatsApp</button>
-            <button class="sbtn sbtn-ghost" onclick="shareLink()">Copiar link</button>
-          </div>
-        </div>
-      </div>
- 
-    </div>
-  </div>
-</section>
- 
-<!-- FONTES -->
-<section class="section section-alt fontes">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Embasamento Científico</div>
-      <h2 class="section-title">Fundamentação das perguntas</h2>
-      <p class="section-sub">Todas as perguntas e dados desta pesquisa são baseados em fontes oficiais e relatórios técnicos reconhecidos internacionalmente.</p>
-    </div>
-    <div class="fontes-grid">
-      <div class="fcard reveal"><div class="fcard-org">Embrapa</div><strong>Empresa Brasileira de Pesquisa Agropecuária</strong><p>Dados sobre plantio direto, ILPF, bioinsumos e perfil geracional de produtores rurais brasileiros.</p></div>
-      <div class="fcard reveal"><div class="fcard-org">MAPA</div><strong>Ministério da Agricultura</strong><p>Plano ABC+ e metas nacionais de descarbonização agrícola — 1,1 bilhão de t CO₂ eq. até 2030.</p></div>
-      <div class="fcard reveal"><div class="fcard-org">IPCC</div><strong>Painel Intergovernamental sobre Mudanças Climáticas</strong><p>Relatório AR6 (2022): agropecuária responde por 22% das emissões globais de GEE.</p></div>
-      <div class="fcard reveal"><div class="fcard-org">MapBiomas</div><strong>Plataforma de Mapeamento do Uso da Terra</strong><p>66% do território brasileiro com vegetação nativa preservada — maior do hemisfério sul.</p></div>
-      <div class="fcard reveal"><div class="fcard-org">OECD-FAO</div><strong>Agricultural Outlook 2023–2032</strong><p>Brasil lidera crescimento em exportações agrícolas sustentáveis. Demanda por certificação ambiental cresce 18% ao ano.</p></div>
-      <div class="fcard reveal"><div class="fcard-org">Lei 15.042</div><strong>Sistema Brasileiro de Comércio de Emissões (SBCE)</strong><p>Regulamentação do mercado de carbono no Brasil, 2024. Estimativa ICLEI: R$ 30–60 bilhões/ano no setor agrícola até 2030.</p></div>
-    </div>
-  </div>
-</section>
- 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <span class="logo-mark">A</span>
-        <div>
-          <strong>Agrinho 2025</strong>
-          <span>O Agro e a Construção de um Futuro Sustentável</span>
-        </div>
-      </div>
-      <div class="footer-info">
-        <p>Projeto desenvolvido para a <strong>Competição Agrinho</strong>. Pesquisa de percepção pública baseada em dados reais do agronegócio sustentável brasileiro.</p>
-        <p class="footer-copy">© 2025 Projeto Agrinho — Todos os direitos reservados.</p>
-      </div>
-    </div>
-  </div>
-</footer>
- 
-<div class="toast" id="toast"></div>
-<script src="script.js"></script>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer>
+    <p>Concurso Agrinho 2026 · Tema: Agro forte, futuro sustentável:
+    equilíbrio entre produção e meio ambiente</p>
+    <p style="margin-top:0.4rem;">
+      Desenvolvido com HTML, CSS e JavaScript · Paraná, Brasil
+    </p>
+  </footer>
+
+  <!-- Script externo — carregado após o HTML para garantir DOM pronto -->
+  <script src="script.js"></script>
 </body>
 </html>
- 
