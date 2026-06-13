@@ -1,234 +1,236 @@
-/* ═══════════════════════════════════════
-   Agrinho 2026 — script.js
-   Funcionalidades: bolhas, contadores,
-   reveal scroll, nav scroll spy, menu mobile
-═══════════════════════════════════════ */
- 
-'use strict';
- 
-/* ─── 1. Bolhas de fundo no HERO ─── */
-function createBubbles() {
-  const container = document.getElementById('bubbles');
-  if (!container) return;
- 
-  const count = 18;
- 
-  for (let i = 0; i < count; i++) {
-    const b = document.createElement('div');
-    b.classList.add('bubble');
- 
-    const size    = 40 + Math.random() * 120;     // px
-    const left    = Math.random() * 100;           // %
-    const delay   = Math.random() * 18;            // s
-    const duration = 14 + Math.random() * 16;     // s
- 
-    b.style.cssText = `
-      width: ${size}px;
-      height: ${size}px;
-      left: ${left}%;
-      bottom: -${size}px;
-      animation-delay: ${delay}s;
-      animation-duration: ${duration}s;
-      opacity: 0;
-    `;
- 
-    container.appendChild(b);
-  }
-}
- 
-/* ─── 2. Contadores animados no HERO ─── */
-function animateCounter(el, target, suffix, duration) {
-  const start     = performance.now();
-  const isDecimal = String(target).includes('.');
- 
-  function step(now) {
-    const elapsed  = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    // easeOutExpo
-    const ease     = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-    const current  = isDecimal
-      ? (ease * target).toFixed(1)
-      : Math.round(ease * target);
- 
-    el.textContent = current + suffix;
-    if (progress < 1) requestAnimationFrame(step);
-  }
- 
-  requestAnimationFrame(step);
-}
- 
-function initCounters() {
-  const counters = [
-    { id: 'cnt1', target: 120,  suffix: 'mi', duration: 2200 },
-    { id: 'cnt2', target: 55,   suffix: '%',  duration: 1800 },
-    { id: 'cnt3', target: 2050, suffix: '',   duration: 2600 },
-  ];
- 
-  // Dispara quando o hero sai de view (ou imediatamente em tela pequena)
-  const hero = document.getElementById('hero');
-  let fired = false;
- 
-  function fire() {
-    if (fired) return;
-    fired = true;
-    counters.forEach(c => {
-      const el = document.getElementById(c.id);
-      if (el) animateCounter(el, c.target, c.suffix, c.duration);
-    });
-  }
- 
-  // Pequeno delay para garantir que a animação seja visível na carga
-  setTimeout(fire, 600);
-}
- 
-/* ─── 3. Reveal ao rolar ─── */
-function initReveal() {
-  const els = document.querySelectorAll('.reveal');
-  if (!els.length) return;
- 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) {
-    els.forEach(el => el.classList.add('visible'));
-    return;
-  }
- 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          // Pequeno stagger para cards em sequência
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 60);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -48px 0px' }
-  );
- 
-  els.forEach(el => observer.observe(el));
-}
- 
-/* ─── 4. Nav: scroll spy + fundo sólido ─── */
-function initNav() {
-  const nav     = document.querySelector('nav');
-  const links   = document.querySelectorAll('.nav-links a');
-  const sections = document.querySelectorAll('section[id]');
- 
-  if (!nav) return;
- 
-  // Fundo sólido ao rolar
-  const onScroll = () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  };
- 
-  // Scroll spy — destaca o link da seção visível
-  const spyObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          links.forEach(a => {
-            const href = a.getAttribute('href');
-            a.classList.toggle('active', href === `#${id}`);
-          });
-        }
-      });
-    },
-    { threshold: 0.35 }
-  );
- 
-  sections.forEach(s => spyObserver.observe(s));
- 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // estado inicial
-}
- 
-/* ─── 5. Menu mobile (hamburger) ─── */
-function initMobileMenu() {
-  const nav   = document.querySelector('nav');
-  if (!nav) return;
- 
-  // Cria o botão dinamicamente para não precisar mudar o HTML
-  const toggle = document.createElement('button');
-  toggle.className    = 'nav-toggle';
-  toggle.ariaLabel    = 'Abrir menu';
-  toggle.innerHTML    = '<span></span><span></span><span></span>';
-  nav.appendChild(toggle);
- 
-  const links = nav.querySelector('.nav-links');
- 
-  toggle.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
-    toggle.ariaExpanded = open;
-    toggle.ariaLabel    = open ? 'Fechar menu' : 'Abrir menu';
-  });
- 
-  // Fecha ao clicar em um link
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      links.classList.remove('open');
-      toggle.ariaExpanded = false;
-    });
-  });
- 
-  // Fecha ao clicar fora
-  document.addEventListener('click', e => {
-    if (!nav.contains(e.target)) {
-      links.classList.remove('open');
-      toggle.ariaExpanded = false;
-    }
-  });
-}
- 
-/* ─── 6. Smooth scroll polyfill (links internos) ─── */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (!target) return;
-      e.preventDefault();
-      const navH = document.querySelector('nav')?.offsetHeight ?? 70;
-      const top  = target.getBoundingClientRect().top + window.scrollY - navH;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
-  });
-}
- 
-/* ─── 7. Stagger nos agro-cards ─── */
-function initAgroStagger() {
-  const cards = document.querySelectorAll('.agro-card.reveal');
-  cards.forEach((card, i) => {
-    card.style.transitionDelay = `${i * 0.07}s`;
-  });
-}
- 
-/* ─── 8. Ticker de texto na timeline (opcional) ─── */
-// Realça o item da timeline mais próximo ao scroll
-function initTimelineHighlight() {
-  const items = document.querySelectorAll('.tl-item');
-  if (!items.length) return;
- 
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      e.target.style.opacity = e.isIntersecting ? '1' : '.55';
-      e.target.style.transition = 'opacity .4s ease';
-    });
-  }, { threshold: 0.6 });
- 
-  items.forEach(i => obs.observe(i));
-}
- 
-/* ─── INIT ─── */
-document.addEventListener('DOMContentLoaded', () => {
-  createBubbles();
-  initCounters();
-  initReveal();
-  initNav();
-  initMobileMenu();
-  initSmoothScroll();
-  initAgroStagger();
-  initTimelineHighlight();
+/* ============================================================
+   AGRINHO 2025 — script.js  (completo e corrigido)
+   ============================================================ */
+
+var currentBlock = 1;
+var toastTimer;
+
+/* ── NAV SCROLL ──────────────────────────────────────────── */
+window.addEventListener('scroll', function () {
+  var nav = document.getElementById('nav');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
 });
- 
+
+/* ── LIKERT ──────────────────────────────────────────────── */
+function pickLikert(groupId, value) {
+  var group = document.getElementById(groupId);
+  if (!group) return;
+  group.querySelectorAll('.lk-btn').forEach(function (btn, i) {
+    btn.classList.toggle('selected', i + 1 === value);
+  });
+}
+
+/* ── NAVEGAÇÃO DOS BLOCOS ────────────────────────────────── */
+function goBlock(n) {
+  var current = document.getElementById('block' + currentBlock);
+  if (current) current.classList.add('hidden');
+
+  var next = document.getElementById('block' + n);
+  if (next) {
+    next.classList.remove('hidden');
+    setTimeout(function () {
+      var top = next.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 30);
+  }
+
+  currentBlock = n;
+
+  var pcts = { 1: 25, 2: 50, 3: 75, 4: 100 };
+  var p = pcts[n] || 25;
+  var bar = document.getElementById('surveyBar');
+  var lbl = document.getElementById('spLabel');
+  var pct = document.getElementById('spPct');
+  if (bar) bar.style.width = p + '%';
+  if (lbl) lbl.textContent = 'Bloco ' + n + ' de 4';
+  if (pct) pct.textContent = p + '%';
+
+  document.querySelectorAll('.sp-step').forEach(function (dot) {
+    var bn = parseInt(dot.getAttribute('data-block'));
+    dot.classList.remove('active', 'done');
+    if (bn === n) dot.classList.add('active');
+    else if (bn < n) dot.classList.add('done');
+  });
+}
+
+/* ── ENVIAR ──────────────────────────────────────────────── */
+function submitSurvey() {
+  var b4 = document.getElementById('block4');
+  if (b4) b4.classList.add('hidden');
+
+  var thanks = document.getElementById('blockThanks');
+  if (thanks) {
+    thanks.classList.remove('hidden');
+    setTimeout(function () {
+      var top = thanks.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 30);
+  }
+
+  var bar = document.getElementById('surveyBar');
+  var lbl = document.getElementById('spLabel');
+  var pct = document.getElementById('spPct');
+  if (bar) bar.style.width = '100%';
+  if (lbl) lbl.textContent = 'Concluído!';
+  if (pct) pct.textContent = '100%';
+
+  document.querySelectorAll('.sp-step').forEach(function (dot) {
+    dot.classList.remove('active');
+    dot.classList.add('done');
+  });
+
+  showToast('✅ Pesquisa enviada! Obrigado pela participação.');
+}
+
+/* ── COMPARTILHAR ────────────────────────────────────────── */
+function shareWhatsApp() {
+  var text = encodeURIComponent('Participei da pesquisa do projeto Agrinho sobre o agro e o futuro sustentável! Responda também: ' + window.location.href);
+  window.open('https://wa.me/?text=' + text, '_blank');
+}
+
+function shareLink() {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(window.location.href).then(function () {
+      showToast('🔗 Link copiado!');
+    });
+  } else {
+    showToast('Copie o link da barra de endereço.');
+  }
+}
+
+/* ── TOAST ───────────────────────────────────────────────── */
+function showToast(msg) {
+  var toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 3000);
+}
+
+/* ── TUDO NO DOM PRONTO ──────────────────────────────────── */
+window.addEventListener('DOMContentLoaded', function () {
+
+  /* Hamburger */
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function () {
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { mobileMenu.classList.remove('open'); });
+    });
+  }
+
+  /* Radio / Checkbox */
+  document.querySelectorAll('.qopt').forEach(function (opt) {
+    opt.addEventListener('click', function (e) {
+      var input = opt.querySelector('input');
+      if (!input) return;
+
+      if (input.type === 'radio') {
+        document.querySelectorAll('input[name="' + input.name + '"]').forEach(function (inp) {
+          var p = inp.closest('.qopt');
+          if (p) p.classList.remove('selected');
+        });
+        input.checked = true;
+        opt.classList.add('selected');
+
+      } else {
+        if (e.target !== input) input.checked = !input.checked;
+        opt.classList.toggle('selected', input.checked);
+
+        var limits = { q4: 2, q13: 3 };
+        var limit = limits[input.name];
+        if (limit) {
+          var total = document.querySelectorAll('input[name="' + input.name + '"]:checked').length;
+          if (total > limit) {
+            input.checked = false;
+            opt.classList.remove('selected');
+            showToast('Selecione no máximo ' + limit + ' opções.');
+          }
+        }
+      }
+    });
+  });
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* IntersectionObserver para reveal e barras */
+  if ('IntersectionObserver' in window) {
+
+    /* Reveal geral */
+    var revObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) { revObs.observe(el); });
+
+    /* Barras de prática */
+    var barObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var fill = entry.target.querySelector('.pc-fill');
+          if (fill) {
+            var pct = fill.getAttribute('data-pct') || '0';
+            setTimeout(function () { fill.style.width = pct + '%'; }, 200);
+          }
+          barObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.practice-card').forEach(function (card) { barObs.observe(card); });
+
+    /* Contador hero */
+    var heroBar = document.querySelector('.hero-stats-bar');
+    if (heroBar) {
+      var countObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.hstat-num').forEach(function (el) {
+              var target = parseInt(el.getAttribute('data-target')) || 0;
+              var suf = el.nextElementSibling ? el.nextElementSibling.textContent : '';
+              var steps = 50; var step = 0;
+              var timer = setInterval(function () {
+                step++;
+                el.textContent = Math.round(target * step / steps);
+                if (step >= steps) clearInterval(timer);
+              }, 1600 / steps);
+            });
+            countObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      countObs.observe(heroBar);
+    }
+  }
+
+  /* Stagger cards */
+  document.querySelectorAll('.practices-grid .practice-card').forEach(function (c, i) {
+    c.style.transitionDelay = (i * 0.08) + 's';
+  });
+  document.querySelectorAll('.fontes-grid .fcard').forEach(function (c, i) {
+    c.style.transitionDelay = (i * 0.06) + 's';
+  });
+
+  /* Dots iniciais */
+  document.querySelectorAll('.sp-step').forEach(function (dot) {
+    if (parseInt(dot.getAttribute('data-block')) === 1) dot.classList.add('active');
+  });
+});
