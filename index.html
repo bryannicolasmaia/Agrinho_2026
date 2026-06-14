@@ -21,23 +21,121 @@
   --c6: #f4f6f2;
   --white: #ffffff;
   --black: #111;
-  --icon-green: #49654c;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+
+/* ZOOM */
+body.zoom-small { font-size: 14px; }
+body.zoom-normal { font-size: 16px; }
+body.zoom-large { font-size: 18px; }
+body.zoom-xlarge { font-size: 20px; }
+
+/* ALTO CONTRASTE - SIMPLES E EFICIENTE */
+body.high-contrast {
+  background: #000000 !important;
+  color: #ffff00 !important;
+}
+
+body.high-contrast .card,
+body.high-contrast .survey-block,
+body.high-contrast .section-alt,
+body.high-contrast .navbar,
+body.high-contrast .footer {
+  background: #111111 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+body.high-contrast .btn-primary,
+body.high-contrast .btn-nav,
+body.high-contrast .btn-next {
+  background: #ffff00 !important;
+  color: #000000 !important;
+}
+
+body.high-contrast a,
+body.high-contrast .stat-number,
+body.high-contrast .card-tag {
+  color: #ffff00 !important;
+}
+
+body.high-contrast .hero {
+  background: #000000 !important;
+}
+
+body.high-contrast .option {
+  background: #222 !important;
+  border-color: #ffff00 !important;
+  color: #ffff00 !important;
+}
+
+body.high-contrast .option.selected {
+  background: #ffff00 !important;
+  color: #000 !important;
+}
+
+body.high-contrast input,
+body.high-contrast textarea {
+  background: #222 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
 }
 
 body {
   font-family: var(--font-sans);
   background-color: var(--c6);
   color: var(--c1);
-  line-height: 1.6;
   scroll-behavior: smooth;
+  transition: all 0.2s ease;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+/* PAINEL DE ACESSIBILIDADE SIMPLES */
+.accessibility-panel {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  background: var(--c2);
+  border-radius: 0 16px 16px 0;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
+}
+
+.accessibility-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.accessibility-btn:hover {
+  background: rgba(255,255,255,0.4);
+  transform: scale(1.05);
+}
+
+.accessibility-btn.active {
+  background: var(--c4);
+  color: var(--c2);
 }
 
 /* NAVIGATION */
@@ -48,7 +146,7 @@ body {
   right: 0;
   background: rgba(244, 246, 242, 0.95);
   backdrop-filter: blur(10px);
-  z-index: 1000;
+  z-index: 100;
   border-bottom: 1px solid var(--c5);
   transition: all 0.3s;
 }
@@ -137,7 +235,6 @@ body {
   height: 2px;
   background: var(--c1);
   margin: 5px 0;
-  transition: 0.3s;
 }
 
 .mobile-menu {
@@ -335,18 +432,6 @@ body {
   object-fit: cover;
 }
 
-.img-badge {
-  position: absolute;
-  bottom: -20px;
-  left: -20px;
-  background: var(--c2);
-  color: white;
-  padding: 16px 20px;
-  border-radius: 16px;
-  font-weight: 600;
-  font-size: 14px;
-}
-
 /* CARDS */
 .cards-grid {
   display: grid;
@@ -398,23 +483,6 @@ body {
   padding: 4px 12px;
   border-radius: 20px;
   margin-bottom: 12px;
-}
-
-.card-tag svg {
-  display: inline;
-  margin-right: 4px;
-  vertical-align: middle;
-}
-
-.card h3 {
-  font-family: var(--font-serif);
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-.card p {
-  font-size: 14px;
-  color: #666;
 }
 
 .progress-bar {
@@ -508,17 +576,6 @@ body {
 .step-dot.active .dot {
   background: var(--c2);
   border-color: var(--c2);
-  box-shadow: 0 0 0 3px rgba(46,90,79,0.2);
-}
-
-.step-dot.done .dot {
-  background: var(--c3);
-  border-color: var(--c3);
-}
-
-.step-dot span {
-  font-size: 11px;
-  white-space: nowrap;
 }
 
 .progress-line {
@@ -564,6 +621,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 28px;
 }
 
 .question {
@@ -642,7 +700,6 @@ body {
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s;
-  font-family: var(--font-sans);
 }
 
 .likert-btn:hover {
@@ -694,7 +751,6 @@ textarea:focus {
   padding: 10px 24px;
   border-radius: 40px;
   cursor: pointer;
-  font-family: var(--font-sans);
   font-weight: 500;
   transition: all 0.2s;
 }
@@ -712,7 +768,6 @@ textarea:focus {
   border-radius: 40px;
   cursor: pointer;
   font-weight: 600;
-  font-family: var(--font-sans);
   transition: all 0.2s;
 }
 
@@ -770,26 +825,6 @@ textarea:focus {
   color: rgba(255,255,255,0.9);
 }
 
-.footer-logos {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: flex-start;
-}
-
-.logo-item {
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.logo-item:hover {
-  transform: translateY(-3px);
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-}
-
-.footer-links {
-  margin-top: 16px;
-}
-
 .footer-links a {
   color: var(--c3);
   text-decoration: none;
@@ -822,27 +857,6 @@ textarea:focus {
   opacity: 1;
 }
 
-/* Estilo para os inputs range da calculadora */
-input[type="range"] {
-  -webkit-appearance: none;
-  height: 6px;
-  background: var(--c5);
-  border-radius: 3px;
-  outline: none;
-}
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
-  background: var(--c2);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-}
-
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .cards-grid {
@@ -862,14 +876,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
     grid-template-columns: 1fr;
     gap: 30px;
     text-align: center;
-  }
-  .footer-logos {
-    align-items: center;
-  }
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
   }
 }
 
@@ -905,15 +911,19 @@ input[type="range"]::-webkit-slider-thumb:hover {
     min-width: 40px;
     padding: 8px;
   }
-  .logo-item svg {
-    width: 100%;
-    height: auto;
-    max-width: 280px;
-  }
 }
 </style>
 </head>
 <body>
+
+<!-- PAINEL DE ACESSIBILIDADE SIMPLES -->
+<div class="accessibility-panel">
+  <button class="accessibility-btn" id="zoomUpBtn" aria-label="Aumentar texto" title="Aumentar texto">A+</button>
+  <button class="accessibility-btn" id="zoomDownBtn" aria-label="Diminuir texto" title="Diminuir texto">A-</button>
+  <button class="accessibility-btn" id="contrastBtn" aria-label="Alto contraste" title="Alto contraste">🌓</button>
+  <button class="accessibility-btn" id="readBtn" aria-label="Ler página" title="Ler página">🔊</button>
+  <button class="accessibility-btn" id="stopReadBtn" aria-label="Parar leitura" title="Parar leitura">⏹️</button>
+</div>
 
 <nav class="navbar" id="navbar">
   <div class="nav-container">
@@ -972,10 +982,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
       </div>
       <div class="img-frame">
         <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop" alt="Agro sustentável">
-        <div class="img-badge">
-          <strong>Plano ABC+</strong>
-          <span>1,1 bi t CO₂ até 2030</span>
-        </div>
       </div>
     </div>
   </div>
@@ -988,14 +994,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
       <h2 class="section-title">Tecnologias que já estão mudando o campo</h2>
       <p class="section-subtitle">Inovações reais que aumentam produtividade e reduzem impactos ambientais.</p>
     </div>
-    <div class="cards-grid" id="cardsGrid">
+    <div class="cards-grid">
       <div class="card">
         <div class="card-img"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=200&fit=crop" alt="Plantio direto"></div>
         <div class="card-content">
-          <span class="card-tag">
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#49654c"/></svg>
-            Solo
-          </span>
+          <span class="card-tag">🌱 Solo</span>
           <h3>Plantio Direto</h3>
           <p>Elimina o revolvimento do solo, sequestrando carbono. Brasil tem 35 milhões de hectares.</p>
           <div class="progress-bar"><div class="progress-fill" data-width="82"></div></div>
@@ -1005,10 +1008,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
       <div class="card">
         <div class="card-img"><img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=200&fit=crop" alt="ILPF"></div>
         <div class="card-content">
-          <span class="card-tag">
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#49654c"/></svg>
-            Integração
-          </span>
+          <span class="card-tag">🐄 Integração</span>
           <h3>ILPF</h3>
           <p>Integra lavoura, pecuária e floresta. Aumenta produtividade em até 40%.</p>
           <div class="progress-bar"><div class="progress-fill" data-width="55"></div></div>
@@ -1018,10 +1018,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
       <div class="card">
         <div class="card-img"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop" alt="Bioinsumos"></div>
         <div class="card-content">
-          <span class="card-tag">
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#49654c"/></svg>
-            Insumos
-          </span>
+          <span class="card-tag">🧪 Insumos</span>
           <h3>Bioinsumos</h3>
           <p>Reduzem emissões de N₂O e cortam custos com adubação química.</p>
           <div class="progress-bar"><div class="progress-fill" data-width="30"></div></div>
@@ -1031,10 +1028,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
       <div class="card">
         <div class="card-img"><img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=400&h=200&fit=crop" alt="Pastagens"></div>
         <div class="card-content">
-          <span class="card-tag">
-            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#49654c"/></svg>
-            Pastagens
-          </span>
+          <span class="card-tag">🌿 Pastagens</span>
           <h3>Recuperação de Pastagens</h3>
           <p>Cada hectare recuperado sequestra até 2 toneladas de CO₂ por ano.</p>
           <div class="progress-bar"><div class="progress-fill" data-width="40"></div></div>
@@ -1045,7 +1039,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
   </div>
 </section>
 
-<!-- SEÇÃO MERCADO DE CARBONO COM CALCULADORA INTERATIVA -->
 <section class="section section-dark" id="carbono">
   <div class="container">
     <div class="grid-2">
@@ -1054,10 +1047,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
         <h2 class="section-title">O campo ganha por cuidar do planeta</h2>
         <p>Um crédito de carbono representa 1 tonelada de CO₂ removida ou evitada. O produtor rural pode vender esses créditos e gerar renda extra.</p>
         <div class="steps">
-          <div class="step"><div class="step-num">1</div><div><strong>Adota prática sustentável</strong><br><span style="font-size:13px;">Plantio direto, ILPF, recuperação</span></div></div>
-          <div class="step"><div class="step-num">2</div><div><strong>Carbono é mensurado</strong><br><span style="font-size:13px;">Auditoria e monitoramento</span></div></div>
-          <div class="step"><div class="step-num">3</div><div><strong>Crédito é certificado</strong><br><span style="font-size:13px;">Verra, Gold Standard ou SBCE</span></div></div>
-          <div class="step"><div class="step-num">4</div><div><strong>Renda adicional</strong><br><span style="font-size:13px;">US$ 5 a US$ 30 por tonelada</span></div></div>
+          <div class="step"><div class="step-num">1</div><div><strong>Adota prática sustentável</strong><br>Plantio direto, ILPF, recuperação</div></div>
+          <div class="step"><div class="step-num">2</div><div><strong>Carbono é mensurado</strong><br>Auditoria e monitoramento</div></div>
+          <div class="step"><div class="step-num">3</div><div><strong>Crédito é certificado</strong><br>Verra, Gold Standard ou SBCE</div></div>
+          <div class="step"><div class="step-num">4</div><div><strong>Renda adicional</strong><br>US$ 5 a US$ 30 por tonelada</div></div>
         </div>
         <div style="background: rgba(255,255,255,0.08); padding: 16px; border-radius: 16px; margin-top: 16px;">
           <strong>⚖️ Lei nº 15.042/2024</strong>
@@ -1065,70 +1058,32 @@ input[type="range"]::-webkit-slider-thumb:hover {
         </div>
       </div>
       <div>
-        <!-- CALCULADORA INTERATIVA DE CARBONO -->
         <div style="background: white; border-radius: 24px; padding: 28px; color: var(--c1);">
           <h3 style="margin-bottom: 20px; text-align: center;">Calculadora de Carbono</h3>
-          <p style="text-align: center; font-size: 13px; margin-bottom: 24px; color: var(--c3);">Ajuste os valores abaixo e veja o potencial de renda da sua propriedade</p>
-          
-          <!-- Slider: Área -->
-          <div style="margin-bottom: 24px;">
-            <label style="display: block; font-weight: 600; margin-bottom: 8px;">
-              <svg width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline; margin-right:6px; vertical-align:middle;"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#2e5a4f"/></svg>
-              Área recuperada (hectares)
-            </label>
-            <input type="range" id="areaInput" min="0" max="2000" step="10" value="500" style="width: 100%;">
-            <div style="display: flex; justify-content: space-between; margin-top: 8px;">
-              <span style="font-size: 12px;">0 ha</span>
-              <span style="font-weight: 700; color: var(--c2);" id="areaValue">500 ha</span>
-              <span style="font-size: 12px;">2000 ha</span>
-            </div>
-          </div>
-          
-          <!-- Slider: Preço do Carbono -->
-          <div style="margin-bottom: 24px;">
-            <label style="display: block; font-weight: 600; margin-bottom: 8px;">
-              <svg width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline; margin-right:6px; vertical-align:middle;"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#2e5a4f"/></svg>
-              Preço do crédito de carbono (US$ / tonelada)
-            </label>
-            <input type="range" id="precoInput" min="5" max="40" step="1" value="20" style="width: 100%;">
-            <div style="display: flex; justify-content: space-between; margin-top: 8px;">
-              <span style="font-size: 12px;">US$ 5/t</span>
-              <span style="font-weight: 700; color: var(--c2);" id="precoValue">US$ 20/t</span>
-              <span style="font-size: 12px;">US$ 40/t</span>
-            </div>
-          </div>
-          
-          <!-- Resultados da simulação -->
-          <div style="background: var(--c6); border-radius: 20px; padding: 20px; margin-top: 24px;">
+          <p style="text-align: center; font-size: 13px; margin-bottom: 24px; color: var(--c3);">Propriedade de 500 hectares de pastagem recuperada</p>
+          <div style="background: var(--c6); border-radius: 20px; padding: 20px;">
             <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
-              <span>Sequestro de CO₂ por hectare/ano</span>
-              <span><strong>2 t/ha</strong></span>
+              <span>Sequestro de CO₂</span>
+              <span><strong>1.000 t/ano</strong></span>
             </div>
             <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
-              <span>Sequestro total de CO₂</span>
-              <span><strong id="sequestroTotal">1.000 t</strong></span>
+              <span>Faturamento Bruto</span>
+              <span><strong>R$ 100.000</strong></span>
             </div>
             <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
-              <span>Faturamento Bruto Anual</span>
-              <span><strong id="faturamentoBruto" style="color: var(--c2);">R$ 100.000</strong></span>
+              <span style="color: #d9534f;">Custos (35%)</span>
+              <span><strong>- R$ 35.000</strong></span>
             </div>
             <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
-              <span style="color: #d9534f;">Custos e Taxas Operacionais (35%)</span>
-              <span><strong id="custos" style="color: #d9534f;">- R$ 35.000</strong></span>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
-              <span style="color: #f0ad4e;">Impostos Estimados (15%)</span>
-              <span><strong id="impostos" style="color: #f0ad4e;">- R$ 15.000</strong></span>
+              <span style="color: #f0ad4e;">Impostos (15%)</span>
+              <span><strong>- R$ 15.000</strong></span>
             </div>
             <div style="display: flex; justify-content: space-between; padding: 16px 0; margin-top: 8px; background: var(--c4); border-radius: 16px; padding: 16px;">
-              <span style="font-weight: 700;">LUCRO LÍQUIDO REAL ANUAL</span>
-              <span><strong style="font-size: 24px; color: var(--c2);" id="lucroLiquido">R$ 50.000</strong></span>
+              <span style="font-weight: 700;">LUCRO LÍQUIDO</span>
+              <span><strong style="font-size: 24px; color: var(--c2);">R$ 50.000</strong></span>
             </div>
           </div>
-          
-          <p style="font-size: 11px; text-align: center; margin-top: 16px; color: var(--c3);">
-            Taxa de câmbio considerada: US$ 1,00 = R$ 5,00 | Sequestro médio: 2 t CO₂/ha/ano
-          </p>
+          <p style="font-size: 11px; text-align: center; margin-top: 16px; color: var(--c3);">Base: US$ 20/t | Taxa de câmbio: R$ 5,00</p>
         </div>
       </div>
     </div>
@@ -1142,19 +1097,16 @@ input[type="range"]::-webkit-slider-thumb:hover {
       <h2 class="section-title">Sua opinião é essencial</h2>
       <p class="section-subtitle">Responda à pesquisa e ajude a construir um panorama real sobre o futuro do agro sustentável.</p>
     </div>
-
     <div class="survey-container">
       <div class="progress-track">
         <div class="progress-steps" id="progressSteps"></div>
         <div class="progress-line"><div class="progress-fill-line" id="progressFill" style="width: 25%;"></div></div>
       </div>
-
       <div id="surveyBlocks"></div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER COM LOGO DA FAEP -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -1165,25 +1117,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
         </div>
         <p>Projeto desenvolvido para a Competição Agrinho. Pesquisa baseada em dados oficiais do agronegócio sustentável brasileiro.</p>
       </div>
-      
       <div class="footer-col">
         <p style="margin-bottom: 12px;"><strong>Realização e Apoio:</strong></p>
-        <div class="footer-logos">
-          <div class="logo-item">
-            <svg width="220" height="75" viewBox="0 0 480 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="480" height="150" rx="10" fill="rgba(255,255,255,0.06)" />
-              <text x="35" y="52" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900" fill="#C8E6D9" letter-spacing="3">FAEP</text>
-              <text x="35" y="82" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#7A9187" letter-spacing="1.5">FEDERAÇÃO DA AGRICULTURA</text>
-              <text x="35" y="100" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#7A9187" letter-spacing="1.5">DO ESTADO DO PARANÁ</text>
-              <line x1="35" y1="115" x2="210" y2="115" stroke="#2E5A4F" stroke-width="2" />
-              <circle cx="420" cy="58" r="34" stroke="#2E5A4F" stroke-width="2" fill="none" />
-              <circle cx="420" cy="58" r="29" stroke="#C8E6D9" stroke-width="1" stroke-dasharray="4 3" fill="none" />
-              <path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#C8E6D9" transform="translate(385, 28) scale(0.8)"/>
-            </svg>
-          </div>
-        </div>
+        <p><strong>FAEP</strong> - Federação da Agricultura do Estado do Paraná</p>
       </div>
-      
       <div class="footer-col">
         <p><strong>Fontes:</strong> Embrapa, MAPA, IPCC, MapBiomas, Lei 15.042/2024</p>
         <p style="margin-top: 12px;">Projeto acadêmico sem fins comerciais.</p>
@@ -1199,56 +1136,125 @@ input[type="range"]::-webkit-slider-thumb:hover {
   </div>
 </footer>
 
-<div class="toast" id="toastMsg">Mensagem</div>
+<div class="toast" id="toastMsg"></div>
 
 <script>
-// CALCULADORA DE CARBONO
-function calcularLucro() {
-  const areaInput = document.getElementById('areaInput');
-  const precoInput = document.getElementById('precoInput');
-  
-  if (!areaInput || !precoInput) return;
-  
-  const area = parseInt(areaInput.value);
-  const precoUSD = parseInt(precoInput.value);
-  
-  const sequestroPorHa = 2;
-  const taxaCambio = 5;
-  const custosPercent = 0.35;
-  const impostosPercent = 0.15;
-  
-  const sequestroTotal = area * sequestroPorHa;
-  const faturamentoUSD = sequestroTotal * precoUSD;
-  const faturamentoBRL = faturamentoUSD * taxaCambio;
-  const custos = faturamentoBRL * custosPercent;
-  const impostos = faturamentoBRL * impostosPercent;
-  const lucroLiquido = faturamentoBRL - custos - impostos;
-  
-  const areaValue = document.getElementById('areaValue');
-  const precoValue = document.getElementById('precoValue');
-  const sequestroTotalEl = document.getElementById('sequestroTotal');
-  const faturamentoBrutoEl = document.getElementById('faturamentoBruto');
-  const custosEl = document.getElementById('custos');
-  const impostosEl = document.getElementById('impostos');
-  const lucroLiquidoEl = document.getElementById('lucroLiquido');
-  
-  if (areaValue) areaValue.innerHTML = `<strong>${area} ha</strong>`;
-  if (precoValue) precoValue.innerHTML = `<strong>US$ ${precoUSD}/t</strong>`;
-  if (sequestroTotalEl) sequestroTotalEl.innerHTML = `<strong>${sequestroTotal.toLocaleString('pt-BR')} t</strong>`;
-  if (faturamentoBrutoEl) faturamentoBrutoEl.innerHTML = `<strong>R$ ${faturamentoBRL.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
-  if (custosEl) custosEl.innerHTML = `<strong>- R$ ${custos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
-  if (impostosEl) impostosEl.innerHTML = `<strong>- R$ ${impostos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
-  if (lucroLiquidoEl) {
-    lucroLiquidoEl.innerHTML = `<strong style="font-size: 24px; color: ${lucroLiquido < 0 ? '#d9534f' : '#2e5a4f'};">R$ ${lucroLiquido.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+// ============================================================
+// ACESSIBILIDADE SIMPLIFICADA - ZOOM, CONTRASTE E VOZ
+// ============================================================
+
+let currentZoom = 1;
+const zoomLevels = ['zoom-small', 'zoom-normal', 'zoom-large', 'zoom-xlarge'];
+let zoomIndex = 1; // normal
+
+function setZoom(level) {
+  zoomLevels.forEach(cls => document.body.classList.remove(cls));
+  document.body.classList.add(level);
+}
+
+function zoomUp() {
+  if (zoomIndex < zoomLevels.length - 1) {
+    zoomIndex++;
+    setZoom(zoomLevels[zoomIndex]);
+    showToast('Texto aumentado');
+  } else {
+    showToast('Tamanho máximo');
   }
 }
 
-const respostas = {};
+function zoomDown() {
+  if (zoomIndex > 0) {
+    zoomIndex--;
+    setZoom(zoomLevels[zoomIndex]);
+    showToast('Texto diminuído');
+  } else {
+    showToast('Tamanho mínimo');
+  }
+}
 
+// Contraste
+let contrastActive = false;
+function toggleContrast() {
+  contrastActive = !contrastActive;
+  if (contrastActive) {
+    document.body.classList.add('high-contrast');
+    showToast('Alto contraste ativado');
+  } else {
+    document.body.classList.remove('high-contrast');
+    showToast('Alto contraste desativado');
+  }
+}
+
+// Leitor de voz - simplificado e sem travamentos
+let synth = window.speechSynthesis;
+let currentUtterance = null;
+
+function getTextToRead() {
+  // Seleciona apenas os textos principais, ignorando ícones e elementos de navegação
+  const mainSections = document.querySelectorAll('.hero-content, .section, .survey-block');
+  let text = '';
+  mainSections.forEach(section => {
+    // Pega apenas textos visíveis, ignora botões e ícones
+    const paragraphs = section.querySelectorAll('p, h1, h2, h3, .q-text, .stat-number, .stat-label, .card-content p, .card-content h3');
+    paragraphs.forEach(el => {
+      let txt = el.innerText.trim();
+      if (txt && !txt.includes('A+') && !txt.includes('A-') && !txt.includes('🌓') && !txt.includes('🔊') && !txt.includes('⏹️')) {
+        text += txt + '. ';
+      }
+    });
+  });
+  return text;
+}
+
+function readPage() {
+  if (synth.speaking) {
+    synth.cancel();
+  }
+  
+  const textToRead = getTextToRead();
+  if (!textToRead) {
+    showToast('Nenhum texto para ler');
+    return;
+  }
+  
+  currentUtterance = new SpeechSynthesisUtterance(textToRead);
+  currentUtterance.lang = 'pt-BR';
+  currentUtterance.rate = 0.9;
+  currentUtterance.pitch = 1;
+  
+  currentUtterance.onend = function() {
+    showToast('Leitura finalizada');
+  };
+  
+  synth.speak(currentUtterance);
+  showToast('Lendo página...');
+}
+
+function stopReading() {
+  if (synth.speaking) {
+    synth.cancel();
+    showToast('Leitura interrompida');
+  } else {
+    showToast('Nenhuma leitura em andamento');
+  }
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toastMsg');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// ============================================================
+// PESQUISA
+// ============================================================
+
+const respostas = {};
 const blocos = [
   {
     nome: "Percepção Geral",
-    icone: '<svg width="28" height="28" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#49654c"/></svg>',
+    icone: "🌿",
     perguntas: [
       { id: "p1", texto: "Qual é o seu perfil em relação ao agronegócio?", tipo: "radio", opcoes: ["Produtor rural ou familiar do campo", "Estudante de ciências agrárias", "Cidadão urbano consumidor", "Profissional da área ambiental", "Educador ou pesquisador"] },
       { id: "p2", texto: "Como você descreveria sua percepção sobre o papel do agronegócio brasileiro na sustentabilidade ambiental?", tipo: "radio", opcoes: ["Principal agente de degradação ambiental", "Impactos negativos, mas vem evoluindo", "Já é majoritariamente sustentável", "Não tenho opinião formada"] },
@@ -1259,7 +1265,7 @@ const blocos = [
   },
   {
     nome: "Descarbonização",
-    icone: '<svg width="28" height="28" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#49654c"/></svg>',
+    icone: "🌾",
     perguntas: [
       { id: "p6", texto: "Você já conhecia o conceito de 'descarbonização' aplicado ao campo?", tipo: "radio", opcoes: ["Sim, conheço bem", "Já ouvi falar superficialmente", "Não conhecia"] },
       { id: "p7", texto: "Das práticas abaixo, quais você acredita ter maior potencial de reduzir as emissões de carbono?", tipo: "checkbox", opcoes: ["Plantio direto", "ILPF", "Bioinsumos", "Manejo de pastagens", "Energia renovável", "Agricultura de precisão"] },
@@ -1270,7 +1276,7 @@ const blocos = [
   },
   {
     nome: "Mercado de Carbono",
-    icone: '<svg width="28" height="28" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#49654c"/></svg>',
+    icone: "💱",
     perguntas: [
       { id: "p11", texto: "Antes de acessar este site, qual era o seu nível de conhecimento sobre o mercado de carbono?", tipo: "radio", opcoes: ["Nunca tinha ouvido falar", "Já ouvi o nome", "Tinha uma ideia geral", "Conhecia bem o conceito"] },
       { id: "p12", texto: "O Brasil regulamentou seu mercado de carbono (SBCE) em 2024. Qual sua percepção sobre o impacto para o produtor rural?", tipo: "likert", min: "Muito negativo", max: "Muito positivo" },
@@ -1281,7 +1287,7 @@ const blocos = [
   },
   {
     nome: "Futuro Sustentável",
-    icone: '<svg width="28" height="28" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m 3.0380378,1 c -0.066717,0 -0.1365,0.02237 -0.1875,0.07337 L 1.595103,2.328804 c -0.102,0.102 -0.102,0.264848 0,0.366848 l 1.0027174,0.994565 a 0.26229866,0.26229866 0 0 0 0.089674,0.08967 L 4.1548857,5.255431 C 4.1921897,5.098387 4.2757988,4.956083 4.3994509,4.847822 L 4.4402119,4.807062 4.2364075,4.603258 5.1249945,3.714671 5.3858641,3.983693 5.7771684,3.633149 4.3016249,2.157606 a 0.26089565,0.26089565 0 0 0 -0.032609,-0.04076 l -0.024457,-0.0163 A 0.26089565,0.26089565 0 0 0 4.2037979,2.067936 L 3.2173856,1.07337 C 3.1663856,1.02237 3.1047552,1 3.0380378,1 Z m 7.9239132,0 c -0.06672,0 -0.128348,0.02237 -0.179348,0.07337 L 9.755429,2.100543 a 0.26089565,0.26089565 0 0 0 -0.07337,0.07337 L 8.222819,3.633152 8.614124,3.983696 8.874993,3.714674 9.76358,4.603261 9.559776,4.807065 9.600536,4.847825 C 9.724449,4.956347 9.807797,5.09839 9.845101,5.255434 L 11.30434,3.788042 a 0.26229866,0.26229866 0 0 0 0.08967,-0.08967 l 1.01087,-1.002718 c 0.102,-0.102 0.102,-0.264848 0,-0.366848 L 11.149451,1.07337 C 11.098451,1.02237 11.028668,1 10.961951,1 Z M 3.0380378,1.627717 3.706516,2.304348 2.8260813,3.184783 2.1494508,2.516304 3.0380378,1.627717 Z m 7.9239132,0 0.888587,0.888587 -0.676631,0.668479 -0.880434,-0.880435 0.668478,-0.676631 z M 4.081516,2.671196 4.7499943,3.347826 3.8695595,4.228261 3.1929291,3.559783 4.081516,2.671196 Z m 5.836957,0 0.888587,0.888587 -0.676631,0.668478 -0.880435,-0.880435 0.668479,-0.67663 z m -2.9184787,0.67663 c -0.061304,0 -0.1220217,0.02217 -0.1711956,0.06522 l -2.013587,1.76087 4.3695653,0 L 7.17119,3.413046 C 7.122016,3.37 7.0612987,3.347826 6.9999943,3.347826 Z M 4.6358639,5.695652 4.1304291,12.722826 c -0.00522,0.07226 0.024065,0.142696 0.07337,0.195652 C 4.253103,12.971435 4.3187769,13 4.3912987,13 L 9.60869,13 c 0.07226,0 0.138456,-0.02857 0.1875,-0.08152 0.0493,-0.05296 0.07859,-0.123391 0.07337,-0.195652 l -0.505435,-7.027174 -4.7282611,0 z M 6.7391247,7 l 0.5217392,0 0,0.782609 -0.5217392,0 0,-0.782609 z M 3.9510813,7.904891 1.595103,10.26087 c -0.102,0.102 -0.102,0.264847 0,0.366847 l 1.2554348,1.255435 c 0.050869,0.05087 0.1207174,0.07337 0.1875,0.07337 0.066783,0 0.1284782,-0.0225 0.1793478,-0.07337 l 0.4891304,-0.48913 0.097826,-1.38587 -0.611413,-0.611413 0.6766304,-0.668478 0.024457,0.0163 0.057065,-0.839674 z m 6.0978257,0 0.05707,0.839674 0.02446,-0.0163 0.676631,0.668478 -0.611414,0.611413 0.09783,1.38587 0.48913,0.48913 c 0.05087,0.05061 0.112565,0.07337 0.179348,0.07337 0.06678,0 0.13663,-0.0225 0.1875,-0.07337 l 1.255435,-1.255435 c 0.102,-0.102 0.102,-0.264847 0,-0.366847 L 10.048918,7.904895 Z M 2.8260813,9.771739 3.706516,10.652174 3.0380378,11.328804 2.1494508,10.440217 2.8260813,9.771739 Z m 8.3478257,0 0.676631,0.668478 -0.888587,0.888587 -0.668478,-0.67663 0.880434,-0.880435 z m -4.1739127,0.619565 c 0.4322609,0 0.7826087,0.350348 0.7826087,0.782609 l 0,1.304348 -1.5652174,0 0,-1.304348 c 0,-0.432261 0.3503478,-0.782609 0.7826087,-0.782609 z" fill="#49654c"/></svg>',
+    icone: "🔭",
     perguntas: [
       { id: "p16", texto: "Em que medida você acredita que um agro mais sustentável pode gerar crescimento econômico para o Brasil?", tipo: "likert", min: "Não gera crescimento", max: "Gera muito crescimento" },
       { id: "p17", texto: "Qual cenário você consideraria o mais transformador para o agro brasileiro nos próximos 10 anos?", tipo: "radio", opcoes: ["Referência mundial em alimentos sustentáveis", "Mercado de carbono bilionário", "IA reduzindo agroquímicos em 40%", "Recuperação de milhões de hectares"] },
@@ -1293,13 +1299,6 @@ const blocos = [
 ];
 
 let blocoAtual = 1;
-
-function showToast(msg) {
-  const toast = document.getElementById('toastMsg');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3000);
-}
 
 function salvarResposta(perguntaId, valor) {
   respostas[perguntaId] = valor;
@@ -1322,151 +1321,91 @@ function irParaBloco(blocoNum) {
     const bloco = document.getElementById(`bloco${i}`);
     if (bloco) bloco.classList.add('hidden');
   }
-  
   const targetBlock = document.getElementById(`bloco${blocoNum}`);
   if (targetBlock) targetBlock.classList.remove('hidden');
-  
   blocoAtual = blocoNum;
   atualizarProgresso();
-  
-  const pesquisaSection = document.getElementById('pesquisa');
-  if (pesquisaSection) {
-    setTimeout(() => {
-      pesquisaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  }
+  document.getElementById('pesquisa').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function enviarPesquisa() {
   document.querySelectorAll('textarea').forEach(ta => {
-    if (ta.value) {
-      const perguntaId = ta.getAttribute('data-id');
-      if (perguntaId) salvarResposta(perguntaId, ta.value);
-    }
+    const perguntaId = ta.getAttribute('data-id');
+    if (perguntaId && ta.value) salvarResposta(perguntaId, ta.value);
   });
   
-  const bloco4 = document.getElementById('bloco4');
-  const thanksBlock = document.getElementById('thanksBlock');
-  if (bloco4) bloco4.classList.add('hidden');
-  if (thanksBlock) thanksBlock.classList.remove('hidden');
-  
-  const progressFill = document.getElementById('progressFill');
-  if (progressFill) progressFill.style.width = '100%';
-  
+  document.getElementById('bloco4').classList.add('hidden');
+  document.getElementById('thanksBlock').classList.remove('hidden');
+  document.getElementById('progressFill').style.width = '100%';
   document.querySelectorAll('.step-dot').forEach(dot => {
     dot.classList.remove('active');
     dot.classList.add('done');
   });
-  
-  showToast('Pesquisa enviada! Obrigado pela participação.');
+  showToast('Pesquisa enviada! Obrigado.');
 }
 
 function renderizarPesquisa() {
   const container = document.getElementById('surveyBlocks');
   const stepsContainer = document.getElementById('progressSteps');
-  
   if (!container) return;
   
   let stepsHtml = '';
-  blocos.forEach((bloco, idx) => {
-    stepsHtml += `
-      <div class="step-dot ${idx === 0 ? 'active' : ''}" data-step="${idx + 1}">
-        <div class="dot"></div>
-        <span>Bloco ${idx + 1}</span>
-      </div>
-    `;
+  blocos.forEach((_, idx) => {
+    stepsHtml += `<div class="step-dot ${idx === 0 ? 'active' : ''}"><div class="dot"></div><span>Bloco ${idx + 1}</span></div>`;
     if (idx < blocos.length - 1) stepsHtml += `<div style="width: 20px;"></div>`;
   });
-  if (stepsContainer) stepsContainer.innerHTML = stepsHtml;
+  stepsContainer.innerHTML = stepsHtml;
   
   let blocosHtml = '';
-  
   blocos.forEach((bloco, blocoIdx) => {
     const blocoNum = blocoIdx + 1;
     blocosHtml += `<div class="survey-block ${blocoNum !== 1 ? 'hidden' : ''}" id="bloco${blocoNum}">`;
-    blocosHtml += `
-      <div class="block-header">
-        <div class="block-icon">${bloco.icone}</div>
-        <div>
-          <h3>Bloco ${blocoNum} — ${bloco.nome}</h3>
-          <p>${bloco.perguntas.length} perguntas</p>
-        </div>
-      </div>
-    `;
+    blocosHtml += `<div class="block-header"><div class="block-icon">${bloco.icone}</div><div><h3>Bloco ${blocoNum} — ${bloco.nome}</h3><p>${bloco.perguntas.length} perguntas</p></div></div>`;
     
     bloco.perguntas.forEach((pergunta, perguntaIdx) => {
       const perguntaId = pergunta.id;
-      const numFormatado = String(perguntaIdx + 1).padStart(2, '0');
-      
-      blocosHtml += `<div class="question" data-id="${perguntaId}">`;
-      blocosHtml += `<div class="q-num">${numFormatado}</div>`;
-      blocosHtml += `<div class="q-text">${pergunta.texto}</div>`;
+      blocosHtml += `<div class="question"><div class="q-num">${String(perguntaIdx + 1).padStart(2, '0')}</div><div class="q-text">${pergunta.texto}</div>`;
       
       if (pergunta.tipo === 'radio') {
-        blocosHtml += `<div class="q-options" data-id="${perguntaId}">`;
+        blocosHtml += `<div class="q-options">`;
         pergunta.opcoes.forEach(opt => {
-          blocosHtml += `
-            <label class="option" data-pergunta="${perguntaId}" data-valor="${opt.replace(/"/g, '&quot;')}">
-              <input type="radio" name="${perguntaId}" value="${opt.replace(/"/g, '&quot;')}">
-              <span>${opt}</span>
-            </label>
-          `;
+          blocosHtml += `<label class="option"><input type="radio" name="${perguntaId}" value="${opt}"><span>${opt}</span></label>`;
         });
         blocosHtml += `</div>`;
       }
       else if (pergunta.tipo === 'checkbox') {
-        blocosHtml += `<div class="q-options" data-id="${perguntaId}" data-max="${pergunta.max || 99}">`;
+        blocosHtml += `<div class="q-options" data-max="${pergunta.max || 99}">`;
         pergunta.opcoes.forEach(opt => {
-          blocosHtml += `
-            <label class="option" data-pergunta="${perguntaId}" data-valor="${opt.replace(/"/g, '&quot;')}">
-              <input type="checkbox" value="${opt.replace(/"/g, '&quot;')}">
-              <span>${opt}</span>
-            </label>
-          `;
+          blocosHtml += `<label class="option"><input type="checkbox" value="${opt}"><span>${opt}</span></label>`;
         });
-        if (pergunta.max) {
-          blocosHtml += `<small style="display:block; margin-top:8px; color:var(--c3);">* Selecione até ${pergunta.max} opções</small>`;
-        }
+        if (pergunta.max) blocosHtml += `<small style="display:block; margin-top:8px;">* Selecione até ${pergunta.max} opções</small>`;
         blocosHtml += `</div>`;
       }
       else if (pergunta.tipo === 'likert') {
         blocosHtml += `<div class="likert-scale" data-id="${perguntaId}">`;
         for (let i = 1; i <= 5; i++) {
-          blocosHtml += `<button type="button" class="likert-btn" data-valor="${i}">${i}</button>`;
+          blocosHtml += `<button class="likert-btn" data-valor="${i}">${i}</button>`;
         }
-        blocosHtml += `</div>`;
-        blocosHtml += `<div class="likert-labels"><span>${pergunta.min}</span><span>${pergunta.max}</span></div>`;
+        blocosHtml += `</div><div class="likert-labels"><span>${pergunta.min}</span><span>${pergunta.max}</span></div>`;
       }
       else if (pergunta.tipo === 'textarea') {
         blocosHtml += `<textarea rows="3" data-id="${perguntaId}" placeholder="Digite sua resposta aqui..."></textarea>`;
       }
-      
       blocosHtml += `</div>`;
     });
     
     blocosHtml += `<div class="block-nav">`;
-    if (blocoNum > 1) {
-      blocosHtml += `<button class="btn-back" onclick="irParaBloco(${blocoNum - 1})">← Voltar</button>`;
-    } else {
-      blocosHtml += `<div></div>`;
-    }
-    
-    if (blocoNum < blocos.length) {
-      blocosHtml += `<button class="btn-next" onclick="irParaBloco(${blocoNum + 1})">Próximo →</button>`;
-    } else {
-      blocosHtml += `<button class="btn-next" onclick="enviarPesquisa()">Enviar Pesquisa</button>`;
-    }
-    blocosHtml += `</div>`;
-    
-    blocosHtml += `</div>`;
+    if (blocoNum > 1) blocosHtml += `<button class="btn-back" onclick="irParaBloco(${blocoNum - 1})">← Voltar</button>`;
+    else blocosHtml += `<div></div>`;
+    if (blocoNum < blocos.length) blocosHtml += `<button class="btn-next" onclick="irParaBloco(${blocoNum + 1})">Próximo →</button>`;
+    else blocosHtml += `<button class="btn-next" onclick="enviarPesquisa()">Enviar Pesquisa</button>`;
+    blocosHtml += `</div></div>`;
   });
   
   blocosHtml += `
     <div class="survey-block hidden" id="thanksBlock">
       <div class="thanks-screen">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: 0 auto 16px;">
-          <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#2e5a4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <div style="font-size: 48px; margin-bottom: 16px;">✅</div>
         <h2>Obrigado pela sua participação!</h2>
         <p>Sua resposta ajuda a construir um retrato real da consciência socioambiental brasileira sobre o campo.</p>
         <div class="thanks-stats">
@@ -1474,160 +1413,101 @@ function renderizarPesquisa() {
           <div class="thanks-card"><div class="thanks-number">R$ 60 bi</div><div>potencial do mercado de carbono</div></div>
           <div class="thanks-card"><div class="thanks-number">71%</div><div>jovens produtores priorizam sustentabilidade</div></div>
         </div>
-        <div>
-          <button class="btn-primary" onclick="shareWhatsApp()">Compartilhar no WhatsApp</button>
-          <button class="btn-outline" style="margin-top:12px; background:white; color:var(--c1);" onclick="copyLink()">Copiar link</button>
-        </div>
+        <div><button class="btn-primary" onclick="shareWhatsApp()">Compartilhar no WhatsApp</button>
+        <button class="btn-outline" style="margin-top:12px; background:white; color:var(--c1);" onclick="copyLink()">Copiar link</button></div>
       </div>
     </div>
   `;
   
   container.innerHTML = blocosHtml;
-  adicionarEventListenersPesquisa();
+  adicionarEventListeners();
 }
 
-function adicionarEventListenersPesquisa() {
+function adicionarEventListeners() {
   document.querySelectorAll('.option').forEach(opt => {
-    const radio = opt.querySelector('input[type="radio"]');
-    if (radio) {
-      opt.addEventListener('click', function(e) {
-        if (e.target !== radio) radio.click();
-      });
-      
-      radio.addEventListener('change', function() {
-        const perguntaId = this.name;
-        const valor = this.value;
-        salvarResposta(perguntaId, valor);
-        
-        document.querySelectorAll(`.option input[name="${perguntaId}"]`).forEach(inp => {
-          inp.closest('.option')?.classList.remove('selected');
-        });
-        this.closest('.option')?.classList.add('selected');
-      });
-      
-      if (respostas[radio.name] === radio.value) {
-        radio.checked = true;
-        opt.classList.add('selected');
-      }
-    }
-  });
-  
-  document.querySelectorAll('.option input[type="checkbox"]').forEach(cb => {
-    const opt = cb.closest('.option');
-    const container = cb.closest('.q-options');
-    const perguntaId = container?.getAttribute('data-id');
-    const max = parseInt(container?.getAttribute('data-max') || '99');
-    
     opt.addEventListener('click', function(e) {
-      if (e.target !== cb) cb.click();
-    });
-    
-    cb.addEventListener('change', function() {
-      const checked = Array.from(container.querySelectorAll('input[type="checkbox"]:checked'));
-      
-      if (checked.length > max) {
-        this.checked = false;
-        showToast(`Selecione no máximo ${max} opções`);
-        return;
-      }
-      
-      const valores = checked.map(c => c.value);
-      salvarResposta(perguntaId, valores);
-      
-      if (this.checked) {
+      const input = opt.querySelector('input');
+      if (input && input.type === 'radio') {
+        document.querySelectorAll(`input[name="${input.name}"]`).forEach(inp => inp.closest('.option')?.classList.remove('selected'));
+        input.checked = true;
         opt.classList.add('selected');
-      } else {
-        opt.classList.remove('selected');
+        salvarResposta(input.name, input.value);
+      } else if (input && input.type === 'checkbox') {
+        input.checked = !input.checked;
+        opt.classList.toggle('selected', input.checked);
+        const container = opt.closest('.q-options');
+        const max = parseInt(container?.getAttribute('data-max') || '99');
+        const checked = Array.from(container.querySelectorAll('input:checked'));
+        if (checked.length > max) {
+          input.checked = false;
+          opt.classList.remove('selected');
+          showToast(`Selecione no máximo ${max} opções`);
+          return;
+        }
+        const perguntaId = opt.closest('.question').querySelector('textarea, .likert-scale') ? 
+          opt.closest('.question').querySelector('textarea')?.getAttribute('data-id') : 
+          opt.closest('.question').querySelector('.likert-scale')?.getAttribute('data-id');
+        if (perguntaId) salvarResposta(perguntaId, checked.map(c => c.value));
       }
     });
-    
-    const saved = respostas[perguntaId];
-    if (saved && Array.isArray(saved) && saved.includes(cb.value)) {
-      cb.checked = true;
-      opt.classList.add('selected');
-    }
   });
   
-  document.querySelectorAll('.likert-scale').forEach(scale => {
-    const perguntaId = scale.getAttribute('data-id');
-    const botoes = scale.querySelectorAll('.likert-btn');
-    
-    botoes.forEach(btn => {
-      btn.addEventListener('click', function() {
-        const valor = parseInt(this.getAttribute('data-valor'));
-        salvarResposta(perguntaId, valor);
-        
-        botoes.forEach(b => b.classList.remove('selected'));
-        this.classList.add('selected');
-      });
-      
-      const saved = respostas[perguntaId];
-      if (saved && parseInt(saved) === parseInt(btn.getAttribute('data-valor'))) {
-        btn.classList.add('selected');
-      }
+  document.querySelectorAll('.likert-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const scale = this.closest('.likert-scale');
+      const perguntaId = scale.getAttribute('data-id');
+      const valor = parseInt(this.getAttribute('data-valor'));
+      scale.querySelectorAll('.likert-btn').forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      salvarResposta(perguntaId, valor);
     });
   });
   
   document.querySelectorAll('textarea').forEach(ta => {
-    const perguntaId = ta.getAttribute('data-id');
-    
-    ta.addEventListener('input', function() {
-      salvarResposta(perguntaId, this.value);
-    });
-    
-    if (respostas[perguntaId]) {
-      ta.value = respostas[perguntaId];
-    }
+    ta.addEventListener('input', () => salvarResposta(ta.getAttribute('data-id'), ta.value));
   });
 }
 
 function shareWhatsApp() {
-  const url = encodeURIComponent(window.location.href);
-  window.open(`https://wa.me/?text=Participei da pesquisa do Agrinho sobre agro sustentável! ${url}`, '_blank');
+  window.open(`https://wa.me/?text=Participei da pesquisa do Agrinho sobre agro sustentável! ${encodeURIComponent(location.href)}`, '_blank');
 }
 
 function copyLink() {
-  navigator.clipboard.writeText(window.location.href);
+  navigator.clipboard.writeText(location.href);
   showToast('Link copiado!');
 }
 
 function animarBarras() {
   document.querySelectorAll('.progress-fill').forEach(bar => {
     const width = bar.getAttribute('data-width');
-    if (width) {
-      setTimeout(() => {
-        bar.style.width = width + '%';
-      }, 300);
-    }
+    if (width) setTimeout(() => bar.style.width = width + '%', 300);
   });
 }
+
+// Eventos e inicialização
+document.getElementById('zoomUpBtn')?.addEventListener('click', zoomUp);
+document.getElementById('zoomDownBtn')?.addEventListener('click', zoomDown);
+document.getElementById('contrastBtn')?.addEventListener('click', toggleContrast);
+document.getElementById('readBtn')?.addEventListener('click', readPage);
+document.getElementById('stopReadBtn')?.addEventListener('click', stopReading);
 
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
-  if (window.scrollY > 50) {
-    nav.classList.add('nav-scrolled');
-  } else {
-    nav.classList.remove('nav-scrolled');
-  }
+  if (window.scrollY > 50) nav.classList.add('nav-scrolled');
+  else nav.classList.remove('nav-scrolled');
 });
 
-const menuBtn = document.getElementById('menuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-if (menuBtn && mobileMenu) {
-  menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
-}
+document.getElementById('menuBtn')?.addEventListener('click', () => {
+  document.getElementById('mobileMenu')?.classList.toggle('open');
+});
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
-    const targetId = this.getAttribute('href');
-    if (targetId === '#') return;
-    const target = document.querySelector(targetId);
+    const target = document.querySelector(this.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (mobileMenu) mobileMenu.classList.remove('open');
+      target.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('mobileMenu')?.classList.remove('open');
     }
   });
 });
@@ -1635,15 +1515,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 document.addEventListener('DOMContentLoaded', () => {
   renderizarPesquisa();
   animarBarras();
-  
-  const areaInput = document.getElementById('areaInput');
-  const precoInput = document.getElementById('precoInput');
-  
-  if (areaInput && precoInput) {
-    areaInput.addEventListener('input', calcularLucro);
-    precoInput.addEventListener('input', calcularLucro);
-    calcularLucro();
-  }
+  setZoom('zoom-normal');
 });
 </script>
 </body>
