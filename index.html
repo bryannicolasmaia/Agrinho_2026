@@ -31,20 +31,70 @@ body.zoom-normal { font-size: 16px; }
 body.zoom-large { font-size: 18px; }
 body.zoom-xlarge { font-size: 20px; }
 
-/* ALTO CONTRASTE - SIMPLES E EFICIENTE */
+/* ALTO CONTRASTE - CORRIGIDO */
 body.high-contrast {
   background: #000000 !important;
   color: #ffff00 !important;
 }
 
+body.high-contrast .navbar {
+  background: #000000 !important;
+  border-bottom-color: #ffff00 !important;
+}
+
+body.high-contrast .logo-text,
+body.high-contrast .nav-links a {
+  color: #ffff00 !important;
+}
+
+body.high-contrast .hero {
+  background: #000000 !important;
+}
+
+body.high-contrast .hero h1,
+body.high-contrast .hero p,
+body.high-contrast .hero-badge {
+  color: #ffff00 !important;
+}
+
+body.high-contrast .stats-bar {
+  background: #111111 !important;
+  border-top-color: #ffff00 !important;
+}
+
+body.high-contrast .stat-number,
+body.high-contrast .stat-label {
+  color: #ffff00 !important;
+}
+
+body.high-contrast .section,
+body.high-contrast .section-alt,
+body.high-contrast .section-dark {
+  background: #000000 !important;
+  color: #ffff00 !important;
+}
+
+body.high-contrast .section-title,
+body.high-contrast .section-subtitle {
+  color: #ffff00 !important;
+}
+
 body.high-contrast .card,
 body.high-contrast .survey-block,
-body.high-contrast .section-alt,
-body.high-contrast .navbar,
-body.high-contrast .footer {
+body.high-contrast .sim-card {
   background: #111111 !important;
   color: #ffff00 !important;
   border-color: #ffff00 !important;
+}
+
+body.high-contrast .card p,
+body.high-contrast .card h3 {
+  color: #ffff00 !important;
+}
+
+body.high-contrast .card-tag {
+  background: #333333 !important;
+  color: #ffff00 !important;
 }
 
 body.high-contrast .btn-primary,
@@ -54,32 +104,67 @@ body.high-contrast .btn-next {
   color: #000000 !important;
 }
 
-body.high-contrast a,
-body.high-contrast .stat-number,
-body.high-contrast .card-tag {
+body.high-contrast .btn-outline {
+  border-color: #ffff00 !important;
   color: #ffff00 !important;
 }
 
-body.high-contrast .hero {
-  background: #000000 !important;
-}
-
 body.high-contrast .option {
-  background: #222 !important;
+  background: #222222 !important;
   border-color: #ffff00 !important;
   color: #ffff00 !important;
 }
 
 body.high-contrast .option.selected {
   background: #ffff00 !important;
-  color: #000 !important;
+  color: #000000 !important;
+}
+
+body.high-contrast .option.selected span {
+  color: #000000 !important;
 }
 
 body.high-contrast input,
-body.high-contrast textarea {
-  background: #222 !important;
+body.high-contrast textarea,
+body.high-contrast .likert-btn {
+  background: #222222 !important;
   color: #ffff00 !important;
   border-color: #ffff00 !important;
+}
+
+body.high-contrast .likert-btn.selected {
+  background: #ffff00 !important;
+  color: #000000 !important;
+}
+
+body.high-contrast .progress-bar,
+body.high-contrast .progress-line {
+  background: #333333 !important;
+}
+
+body.high-contrast .progress-fill,
+body.high-contrast .progress-fill-line {
+  background: #ffff00 !important;
+}
+
+body.high-contrast .step {
+  background: #111111 !important;
+  border-color: #ffff00 !important;
+}
+
+body.high-contrast .footer {
+  background: #000000 !important;
+  border-top-color: #ffff00 !important;
+}
+
+body.high-contrast .footer a,
+body.high-contrast .footer p {
+  color: #ffff00 !important;
+}
+
+body.high-contrast .toast {
+  background: #ffff00 !important;
+  color: #000000 !important;
 }
 
 body {
@@ -87,7 +172,7 @@ body {
   background-color: var(--c6);
   color: var(--c1);
   scroll-behavior: smooth;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .container {
@@ -96,7 +181,7 @@ body {
   padding: 0 24px;
 }
 
-/* PAINEL DE ACESSIBILIDADE SIMPLES */
+/* PAINEL DE ACESSIBILIDADE */
 .accessibility-panel {
   position: fixed;
   left: 0;
@@ -131,11 +216,6 @@ body {
 .accessibility-btn:hover {
   background: rgba(255,255,255,0.4);
   transform: scale(1.05);
-}
-
-.accessibility-btn.active {
-  background: var(--c4);
-  color: var(--c2);
 }
 
 /* NAVIGATION */
@@ -857,6 +937,27 @@ textarea:focus {
   opacity: 1;
 }
 
+/* Slider para calculadora */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 6px;
+  background: var(--c5);
+  border-radius: 3px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--c2);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .cards-grid {
@@ -916,13 +1017,13 @@ textarea:focus {
 </head>
 <body>
 
-<!-- PAINEL DE ACESSIBILIDADE SIMPLES -->
+<!-- PAINEL DE ACESSIBILIDADE -->
 <div class="accessibility-panel">
-  <button class="accessibility-btn" id="zoomUpBtn" aria-label="Aumentar texto" title="Aumentar texto">A+</button>
-  <button class="accessibility-btn" id="zoomDownBtn" aria-label="Diminuir texto" title="Diminuir texto">A-</button>
-  <button class="accessibility-btn" id="contrastBtn" aria-label="Alto contraste" title="Alto contraste">🌓</button>
-  <button class="accessibility-btn" id="readBtn" aria-label="Ler página" title="Ler página">🔊</button>
-  <button class="accessibility-btn" id="stopReadBtn" aria-label="Parar leitura" title="Parar leitura">⏹️</button>
+  <button class="accessibility-btn" id="zoomUpBtn" title="Aumentar texto">A+</button>
+  <button class="accessibility-btn" id="zoomDownBtn" title="Diminuir texto">A-</button>
+  <button class="accessibility-btn" id="contrastBtn" title="Alto contraste">🌓</button>
+  <button class="accessibility-btn" id="readBtn" title="Ler página">🔊</button>
+  <button class="accessibility-btn" id="stopReadBtn" title="Parar leitura">⏹️</button>
 </div>
 
 <nav class="navbar" id="navbar">
@@ -1039,6 +1140,7 @@ textarea:focus {
   </div>
 </section>
 
+<!-- SEÇÃO MERCADO DE CARBONO COM CALCULADORA INTERATIVA -->
 <section class="section section-dark" id="carbono">
   <div class="container">
     <div class="grid-2">
@@ -1058,32 +1160,64 @@ textarea:focus {
         </div>
       </div>
       <div>
+        <!-- CALCULADORA INTERATIVA DE CARBONO -->
         <div style="background: white; border-radius: 24px; padding: 28px; color: var(--c1);">
-          <h3 style="margin-bottom: 20px; text-align: center;">Calculadora de Carbono</h3>
-          <p style="text-align: center; font-size: 13px; margin-bottom: 24px; color: var(--c3);">Propriedade de 500 hectares de pastagem recuperada</p>
-          <div style="background: var(--c6); border-radius: 20px; padding: 20px;">
-            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
-              <span>Sequestro de CO₂</span>
-              <span><strong>1.000 t/ano</strong></span>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
-              <span>Faturamento Bruto</span>
-              <span><strong>R$ 100.000</strong></span>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
-              <span style="color: #d9534f;">Custos (35%)</span>
-              <span><strong>- R$ 35.000</strong></span>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
-              <span style="color: #f0ad4e;">Impostos (15%)</span>
-              <span><strong>- R$ 15.000</strong></span>
-            </div>
-            <div style="display: flex; justify-content: space-between; padding: 16px 0; margin-top: 8px; background: var(--c4); border-radius: 16px; padding: 16px;">
-              <span style="font-weight: 700;">LUCRO LÍQUIDO</span>
-              <span><strong style="font-size: 24px; color: var(--c2);">R$ 50.000</strong></span>
+          <h3 style="margin-bottom: 20px; text-align: center;">💰 Calculadora de Carbono</h3>
+          <p style="text-align: center; font-size: 13px; margin-bottom: 24px; color: var(--c3);">Ajuste os valores abaixo e veja o potencial de renda da sua propriedade</p>
+          
+          <!-- Slider: Área -->
+          <div style="margin-bottom: 24px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 8px;">🌾 Área recuperada (hectares)</label>
+            <input type="range" id="areaInput" min="0" max="2000" step="10" value="500" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+              <span style="font-size: 12px;">0 ha</span>
+              <span style="font-weight: 700; color: var(--c2);" id="areaValue">500 ha</span>
+              <span style="font-size: 12px;">2000 ha</span>
             </div>
           </div>
-          <p style="font-size: 11px; text-align: center; margin-top: 16px; color: var(--c3);">Base: US$ 20/t | Taxa de câmbio: R$ 5,00</p>
+          
+          <!-- Slider: Preço do Carbono -->
+          <div style="margin-bottom: 24px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 8px;">💵 Preço do crédito (US$ / tonelada)</label>
+            <input type="range" id="precoInput" min="5" max="40" step="1" value="20" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+              <span style="font-size: 12px;">US$ 5/t</span>
+              <span style="font-weight: 700; color: var(--c2);" id="precoValue">US$ 20/t</span>
+              <span style="font-size: 12px;">US$ 40/t</span>
+            </div>
+          </div>
+          
+          <!-- Resultados da simulação -->
+          <div style="background: var(--c6); border-radius: 20px; padding: 20px; margin-top: 24px;">
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span>🌱 Sequestro de CO₂ por hectare/ano</span>
+              <span><strong>2 t/ha</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span>📊 Sequestro total de CO₂</span>
+              <span><strong id="sequestroTotal">1.000 t</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span>💰 Faturamento Bruto Anual</span>
+              <span><strong id="faturamentoBruto" style="color: var(--c2);">R$ 100.000</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span style="color: #d9534f;">📉 Custos e Taxas Operacionais (35%)</span>
+              <span><strong id="custos" style="color: #d9534f;">- R$ 35.000</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span style="color: #f0ad4e;">📋 Impostos Estimados (15%)</span>
+              <span><strong id="impostos" style="color: #f0ad4e;">- R$ 15.000</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 16px 0; margin-top: 8px; background: var(--c4); border-radius: 16px; padding: 16px;">
+              <span style="font-weight: 700;">💰 LUCRO LÍQUIDO REAL ANUAL</span>
+              <span><strong style="font-size: 24px; color: var(--c2);" id="lucroLiquido">R$ 50.000</strong></span>
+            </div>
+          </div>
+          
+          <p style="font-size: 11px; text-align: center; margin-top: 16px; color: var(--c3);">
+            💱 Taxa de câmbio: US$ 1,00 = R$ 5,00 | Sequestro médio: 2 t CO₂/ha/ano
+          </p>
         </div>
       </div>
     </div>
@@ -1140,12 +1274,56 @@ textarea:focus {
 
 <script>
 // ============================================================
-// ACESSIBILIDADE SIMPLIFICADA - ZOOM, CONTRASTE E VOZ
+// CALCULADORA DE CARBONO
+// ============================================================
+
+function calcularLucro() {
+  const areaInput = document.getElementById('areaInput');
+  const precoInput = document.getElementById('precoInput');
+  
+  if (!areaInput || !precoInput) return;
+  
+  const area = parseInt(areaInput.value);
+  const precoUSD = parseInt(precoInput.value);
+  
+  const sequestroPorHa = 2;
+  const taxaCambio = 5;
+  const custosPercent = 0.35;
+  const impostosPercent = 0.15;
+  
+  const sequestroTotal = area * sequestroPorHa;
+  const faturamentoUSD = sequestroTotal * precoUSD;
+  const faturamentoBRL = faturamentoUSD * taxaCambio;
+  const custos = faturamentoBRL * custosPercent;
+  const impostos = faturamentoBRL * impostosPercent;
+  const lucroLiquido = faturamentoBRL - custos - impostos;
+  
+  const areaValue = document.getElementById('areaValue');
+  const precoValue = document.getElementById('precoValue');
+  const sequestroTotalEl = document.getElementById('sequestroTotal');
+  const faturamentoBrutoEl = document.getElementById('faturamentoBruto');
+  const custosEl = document.getElementById('custos');
+  const impostosEl = document.getElementById('impostos');
+  const lucroLiquidoEl = document.getElementById('lucroLiquido');
+  
+  if (areaValue) areaValue.innerHTML = `<strong>${area} ha</strong>`;
+  if (precoValue) precoValue.innerHTML = `<strong>US$ ${precoUSD}/t</strong>`;
+  if (sequestroTotalEl) sequestroTotalEl.innerHTML = `<strong>${sequestroTotal.toLocaleString('pt-BR')} t</strong>`;
+  if (faturamentoBrutoEl) faturamentoBrutoEl.innerHTML = `<strong>R$ ${faturamentoBRL.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  if (custosEl) custosEl.innerHTML = `<strong>- R$ ${custos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  if (impostosEl) impostosEl.innerHTML = `<strong>- R$ ${impostos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  if (lucroLiquidoEl) {
+    lucroLiquidoEl.innerHTML = `<strong style="font-size: 24px; color: ${lucroLiquido < 0 ? '#d9534f' : '#2e5a4f'};">R$ ${lucroLiquido.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  }
+}
+
+// ============================================================
+// ACESSIBILIDADE - ZOOM, CONTRASTE E VOZ
 // ============================================================
 
 let currentZoom = 1;
 const zoomLevels = ['zoom-small', 'zoom-normal', 'zoom-large', 'zoom-xlarge'];
-let zoomIndex = 1; // normal
+let zoomIndex = 1;
 
 function setZoom(level) {
   zoomLevels.forEach(cls => document.body.classList.remove(cls));
@@ -1172,7 +1350,6 @@ function zoomDown() {
   }
 }
 
-// Contraste
 let contrastActive = false;
 function toggleContrast() {
   contrastActive = !contrastActive;
@@ -1185,20 +1362,17 @@ function toggleContrast() {
   }
 }
 
-// Leitor de voz - simplificado e sem travamentos
 let synth = window.speechSynthesis;
 let currentUtterance = null;
 
 function getTextToRead() {
-  // Seleciona apenas os textos principais, ignorando ícones e elementos de navegação
   const mainSections = document.querySelectorAll('.hero-content, .section, .survey-block');
   let text = '';
   mainSections.forEach(section => {
-    // Pega apenas textos visíveis, ignora botões e ícones
     const paragraphs = section.querySelectorAll('p, h1, h2, h3, .q-text, .stat-number, .stat-label, .card-content p, .card-content h3');
     paragraphs.forEach(el => {
       let txt = el.innerText.trim();
-      if (txt && !txt.includes('A+') && !txt.includes('A-') && !txt.includes('🌓') && !txt.includes('🔊') && !txt.includes('⏹️')) {
+      if (txt && !txt.includes('A+') && !txt.includes('A-') && !txt.includes('🌓') && !txt.includes('🔊') && !txt.includes('⏹️') && !txt.includes('💰') && !txt.includes('🌾') && !txt.includes('💵') && !txt.includes('🌱') && !txt.includes('📊')) {
         text += txt + '. ';
       }
     });
@@ -1212,7 +1386,7 @@ function readPage() {
   }
   
   const textToRead = getTextToRead();
-  if (!textToRead) {
+  if (!textToRead || textToRead.length < 10) {
     showToast('Nenhum texto para ler');
     return;
   }
@@ -1516,6 +1690,15 @@ document.addEventListener('DOMContentLoaded', () => {
   renderizarPesquisa();
   animarBarras();
   setZoom('zoom-normal');
+  
+  // Inicializar calculadora
+  const areaInput = document.getElementById('areaInput');
+  const precoInput = document.getElementById('precoInput');
+  if (areaInput && precoInput) {
+    areaInput.addEventListener('input', calcularLucro);
+    precoInput.addEventListener('input', calcularLucro);
+    calcularLucro();
+  }
 });
 </script>
 </body>
