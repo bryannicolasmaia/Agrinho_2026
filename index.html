@@ -767,6 +767,27 @@ textarea:focus {
   opacity: 1;
 }
 
+/* Estilo para os inputs range da calculadora */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 6px;
+  background: var(--c5);
+  border-radius: 3px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--c2);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .cards-grid {
@@ -898,7 +919,7 @@ textarea:focus {
       <div class="card">
         <div class="card-img"><img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=200&fit=crop" alt="Plantio direto"></div>
         <div class="card-content">
-          <span class="card-tag"> Solo</span>
+          <span class="card-tag">🌱 Solo</span>
           <h3>Plantio Direto</h3>
           <p>Elimina o revolvimento do solo, sequestrando carbono. Brasil tem 35 milhões de hectares.</p>
           <div class="progress-bar"><div class="progress-fill" data-width="82"></div></div>
@@ -908,7 +929,7 @@ textarea:focus {
       <div class="card">
         <div class="card-img"><img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=200&fit=crop" alt="ILPF"></div>
         <div class="card-content">
-          <span class="card-tag"> Integração</span>
+          <span class="card-tag">🐄 Integração</span>
           <h3>ILPF</h3>
           <p>Integra lavoura, pecuária e floresta. Aumenta produtividade em até 40%.</p>
           <div class="progress-bar"><div class="progress-fill" data-width="55"></div></div>
@@ -918,7 +939,7 @@ textarea:focus {
       <div class="card">
         <div class="card-img"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop" alt="Bioinsumos"></div>
         <div class="card-content">
-          <span class="card-tag"> Insumos</span>
+          <span class="card-tag">🧪 Insumos</span>
           <h3>Bioinsumos</h3>
           <p>Reduzem emissões de N₂O e cortam custos com adubação química.</p>
           <div class="progress-bar"><div class="progress-fill" data-width="30"></div></div>
@@ -928,7 +949,7 @@ textarea:focus {
       <div class="card">
         <div class="card-img"><img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=400&h=200&fit=crop" alt="Pastagens"></div>
         <div class="card-content">
-          <span class="card-tag"> Pastagens</span>
+          <span class="card-tag">🌿 Pastagens</span>
           <h3>Recuperação de Pastagens</h3>
           <p>Cada hectare recuperado sequestra até 2 toneladas de CO₂ por ano.</p>
           <div class="progress-bar"><div class="progress-fill" data-width="40"></div></div>
@@ -939,6 +960,7 @@ textarea:focus {
   </div>
 </section>
 
+<!-- SEÇÃO MERCADO DE CARBONO COM CALCULADORA INTERATIVA -->
 <section class="section section-dark" id="carbono">
   <div class="container">
     <div class="grid-2">
@@ -953,18 +975,69 @@ textarea:focus {
           <div class="step"><div class="step-num">4</div><div><strong>Renda adicional</strong><br><span style="font-size:13px;">US$ 5 a US$ 30 por tonelada</span></div></div>
         </div>
         <div style="background: rgba(255,255,255,0.08); padding: 16px; border-radius: 16px; margin-top: 16px;">
-          <strong> Lei nº 15.042/2024</strong>
+          <strong>⚖️ Lei nº 15.042/2024</strong>
           <p style="font-size:13px; margin-top:6px;">Brasil institui o SBCE — Sistema Brasileiro de Comércio de Emissões.</p>
         </div>
       </div>
       <div>
+        <!-- CALCULADORA INTERATIVA DE CARBONO -->
         <div style="background: white; border-radius: 24px; padding: 28px; color: var(--c1);">
-          <h3 style="margin-bottom: 20px;">Simulação de renda</h3>
-          <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--c5);"><span>Propriedade</span><strong>500 ha de pastagem</strong></div>
-          <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--c5);"><span>Sequestro estimado</span><strong>1.000 t CO₂/ano</strong></div>
-          <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--c5);"><span>Preço por crédito</span><strong>US$ 10–30 / t</strong></div>
-          <div style="display: flex; justify-content: space-between; padding: 16px 0; margin-top: 8px; background: var(--c4); border-radius: 16px; padding: 16px;"><span><strong>Renda adicional anual</strong></span><strong style="color: var(--c2);">R$ 50k – R$ 165k</strong></div>
-          <p style="font-size: 12px; text-align: center; margin-top: 16px; color: var(--c3);">Sem alterar a produção principal</p>
+          <h3 style="margin-bottom: 20px; text-align: center;">💰 Calculadora de Carbono</h3>
+          <p style="text-align: center; font-size: 13px; margin-bottom: 24px; color: var(--c3);">Ajuste os valores abaixo e veja o potencial de renda da sua propriedade</p>
+          
+          <!-- Slider: Área -->
+          <div style="margin-bottom: 24px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 8px;">🌾 Área recuperada (hectares)</label>
+            <input type="range" id="areaInput" min="0" max="2000" step="10" value="500" style="width: 100%; accent-color: var(--c2);">
+            <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+              <span style="font-size: 12px;">0 ha</span>
+              <span style="font-weight: 700; color: var(--c2);" id="areaValue">500 ha</span>
+              <span style="font-size: 12px;">2000 ha</span>
+            </div>
+          </div>
+          
+          <!-- Slider: Preço do Carbono -->
+          <div style="margin-bottom: 24px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 8px;">💵 Preço do crédito de carbono (US$ / tonelada)</label>
+            <input type="range" id="precoInput" min="5" max="40" step="1" value="20" style="width: 100%; accent-color: var(--c2);">
+            <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+              <span style="font-size: 12px;">US$ 5/t</span>
+              <span style="font-weight: 700; color: var(--c2);" id="precoValue">US$ 20/t</span>
+              <span style="font-size: 12px;">US$ 40/t</span>
+            </div>
+          </div>
+          
+          <!-- Resultados da simulação -->
+          <div style="background: var(--c6); border-radius: 20px; padding: 20px; margin-top: 24px;">
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span>🌱 Sequestro de CO₂ por hectare/ano</span>
+              <span><strong>2 t/ha</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span>📊 Sequestro total de CO₂</span>
+              <span><strong id="sequestroTotal">1.000 t</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span>💰 Faturamento Bruto Anual</span>
+              <span><strong id="faturamentoBruto" style="color: var(--c2);">R$ 100.000</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span style="color: #d9534f;">📉 Custos e Taxas Operacionais (35%)</span>
+              <span><strong id="custos" style="color: #d9534f;">- R$ 35.000</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--c5);">
+              <span style="color: #f0ad4e;">📋 Impostos Estimados (15%)</span>
+              <span><strong id="impostos" style="color: #f0ad4e;">- R$ 15.000</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 16px 0; margin-top: 8px; background: var(--c4); border-radius: 16px; padding: 16px;">
+              <span style="font-weight: 700;">💰 LUCRO LÍQUIDO REAL ANUAL</span>
+              <span><strong style="font-size: 24px; color: var(--c2);" id="lucroLiquido">R$ 50.000</strong></span>
+            </div>
+          </div>
+          
+          <p style="font-size: 11px; text-align: center; margin-top: 16px; color: var(--c3);">
+            💱 Taxa de câmbio considerada: US$ 1,00 = R$ 5,00 | Sequestro médio: 2 t CO₂/ha/ano
+          </p>
         </div>
       </div>
     </div>
@@ -1015,14 +1088,47 @@ textarea:focus {
 // AGRINHO 2026 - SCRIPT COMPLETAMENTE FUNCIONAL
 // ============================================================
 
-// Objeto para armazenar todas as respostas
+// CALCULADORA DE CARBONO
+function calcularLucro() {
+  const areaInput = document.getElementById('areaInput');
+  const precoInput = document.getElementById('precoInput');
+  
+  if (!areaInput || !precoInput) return;
+  
+  const area = parseInt(areaInput.value);
+  const precoUSD = parseInt(precoInput.value);
+  
+  const sequestroPorHa = 2;
+  const taxaCambio = 5;
+  const custosPercent = 0.35;
+  const impostosPercent = 0.15;
+  
+  const sequestroTotal = area * sequestroPorHa;
+  const faturamentoUSD = sequestroTotal * precoUSD;
+  const faturamentoBRL = faturamentoUSD * taxaCambio;
+  const custos = faturamentoBRL * custosPercent;
+  const impostos = faturamentoBRL * impostosPercent;
+  const lucroLiquido = faturamentoBRL - custos - impostos;
+  
+  document.getElementById('areaValue').innerHTML = `<strong>${area} ha</strong>`;
+  document.getElementById('precoValue').innerHTML = `<strong>US$ ${precoUSD}/t</strong>`;
+  document.getElementById('sequestroTotal').innerHTML = `<strong>${sequestroTotal.toLocaleString('pt-BR')} t</strong>`;
+  document.getElementById('faturamentoBruto').innerHTML = `<strong>R$ ${faturamentoBRL.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  document.getElementById('custos').innerHTML = `<strong>- R$ ${custos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  document.getElementById('impostos').innerHTML = `<strong>- R$ ${impostos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  
+  const lucroElement = document.getElementById('lucroLiquido');
+  lucroElement.innerHTML = `<strong style="font-size: 24px; color: ${lucroLiquido < 0 ? '#d9534f' : 'var(--c2)'};">R$ ${lucroLiquido.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+}
+
+// Objeto para armazenar todas as respostas da pesquisa
 const respostas = {};
 
-// Blocos de perguntas
+// Blocos de perguntas da pesquisa
 const blocos = [
-  { // Bloco 1 - Percepção Geral
+  {
     nome: "Percepção Geral",
-    icone: "",
+    icone: "🌿",
     perguntas: [
       { id: "p1", texto: "Qual é o seu perfil em relação ao agronegócio?", tipo: "radio", opcoes: ["Produtor rural ou familiar do campo", "Estudante de ciências agrárias", "Cidadão urbano consumidor", "Profissional da área ambiental", "Educador ou pesquisador"] },
       { id: "p2", texto: "Como você descreveria sua percepção sobre o papel do agronegócio brasileiro na sustentabilidade ambiental?", tipo: "radio", opcoes: ["Principal agente de degradação ambiental", "Impactos negativos, mas vem evoluindo", "Já é majoritariamente sustentável", "Não tenho opinião formada"] },
@@ -1031,9 +1137,9 @@ const blocos = [
       { id: "p5", texto: "Qual é o maior obstáculo para o produtor rural adotar práticas mais sustentáveis?", tipo: "textarea" }
     ]
   },
-  { // Bloco 2 - Descarbonização
+  {
     nome: "Descarbonização",
-    icone: "",
+    icone: "🌾",
     perguntas: [
       { id: "p6", texto: "Você já conhecia o conceito de 'descarbonização' aplicado ao campo?", tipo: "radio", opcoes: ["Sim, conheço bem", "Já ouvi falar superficialmente", "Não conhecia"] },
       { id: "p7", texto: "Das práticas abaixo, quais você acredita ter maior potencial de reduzir as emissões de carbono?", tipo: "checkbox", opcoes: ["Plantio direto", "ILPF", "Bioinsumos", "Manejo de pastagens", "Energia renovável", "Agricultura de precisão"] },
@@ -1042,9 +1148,9 @@ const blocos = [
       { id: "p10", texto: "O governo brasileiro apoia suficientemente a transição para uma agricultura de baixo carbono?", tipo: "likert", min: "Não apoia nada", max: "Apoia muito" }
     ]
   },
-  { // Bloco 3 - Mercado de Carbono
+  {
     nome: "Mercado de Carbono",
-    icone: "",
+    icone: "💱",
     perguntas: [
       { id: "p11", texto: "Antes de acessar este site, qual era o seu nível de conhecimento sobre o mercado de carbono?", tipo: "radio", opcoes: ["Nunca tinha ouvido falar", "Já ouvi o nome", "Tinha uma ideia geral", "Conhecia bem o conceito"] },
       { id: "p12", texto: "O Brasil regulamentou seu mercado de carbono (SBCE) em 2024. Qual sua percepção sobre o impacto para o produtor rural?", tipo: "likert", min: "Muito negativo", max: "Muito positivo" },
@@ -1053,9 +1159,9 @@ const blocos = [
       { id: "p15", texto: "Se você fosse um produtor rural, participaria do mercado de carbono? Justifique.", tipo: "textarea" }
     ]
   },
-  { // Bloco 4 - Futuro Sustentável
+  {
     nome: "Futuro Sustentável",
-    icone: "",
+    icone: "🔭",
     perguntas: [
       { id: "p16", texto: "Em que medida você acredita que um agro mais sustentável pode gerar crescimento econômico para o Brasil?", tipo: "likert", min: "Não gera crescimento", max: "Gera muito crescimento" },
       { id: "p17", texto: "Qual cenário você consideraria o mais transformador para o agro brasileiro nos próximos 10 anos?", tipo: "radio", opcoes: ["Referência mundial em alimentos sustentáveis", "Mercado de carbono bilionário", "IA reduzindo agroquímicos em 40%", "Recuperação de milhões de hectares"] },
@@ -1068,7 +1174,6 @@ const blocos = [
 
 let blocoAtual = 1;
 
-// Função para mostrar toast
 function showToast(msg) {
   const toast = document.getElementById('toastMsg');
   toast.textContent = msg;
@@ -1076,13 +1181,10 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-// Função para salvar resposta
 function salvarResposta(perguntaId, valor) {
   respostas[perguntaId] = valor;
-  console.log('Resposta salva:', perguntaId, valor);
 }
 
-// Função para atualizar a barra de progresso
 function atualizarProgresso() {
   const percent = (blocoAtual / blocos.length) * 100;
   document.getElementById('progressFill').style.width = `${percent}%`;
@@ -1094,22 +1196,18 @@ function atualizarProgresso() {
   });
 }
 
-// Função para navegar entre blocos
 function irParaBloco(blocoNum) {
-  // Esconder todos os blocos
   for (let i = 1; i <= blocos.length; i++) {
     const bloco = document.getElementById(`bloco${i}`);
     if (bloco) bloco.classList.add('hidden');
   }
   
-  // Mostrar o bloco alvo
   const targetBlock = document.getElementById(`bloco${blocoNum}`);
   if (targetBlock) targetBlock.classList.remove('hidden');
   
   blocoAtual = blocoNum;
   atualizarProgresso();
   
-  // Rolar até a pesquisa
   const pesquisaSection = document.getElementById('pesquisa');
   if (pesquisaSection) {
     setTimeout(() => {
@@ -1118,9 +1216,7 @@ function irParaBloco(blocoNum) {
   }
 }
 
-// Função para enviar a pesquisa
 function enviarPesquisa() {
-  // Coletar respostas de textareas que podem não ter sido capturadas
   document.querySelectorAll('textarea').forEach(ta => {
     if (ta.value) {
       const perguntaId = ta.getAttribute('data-id');
@@ -1128,31 +1224,24 @@ function enviarPesquisa() {
     }
   });
   
-  // Esconder o último bloco e mostrar o agradecimento
   document.getElementById('bloco4').classList.add('hidden');
   document.getElementById('thanksBlock').classList.remove('hidden');
-  
-  // Atualizar progresso para 100%
   document.getElementById('progressFill').style.width = '100%';
   document.querySelectorAll('.step-dot').forEach(dot => {
     dot.classList.remove('active');
     dot.classList.add('done');
   });
   
-  showToast(':D Pesquisa enviada! Obrigado pela participação.');
-  
-  // Exibir no console as respostas (útil para debug)
+  showToast('✅ Pesquisa enviada! Obrigado pela participação.');
   console.log('Respostas coletadas:', respostas);
 }
 
-// Renderizar a pesquisa completa
 function renderizarPesquisa() {
   const container = document.getElementById('surveyBlocks');
   const stepsContainer = document.getElementById('progressSteps');
   
   if (!container) return;
   
-  // Renderizar os passos de progresso
   let stepsHtml = '';
   blocos.forEach((bloco, idx) => {
     stepsHtml += `
@@ -1165,7 +1254,6 @@ function renderizarPesquisa() {
   });
   stepsContainer.innerHTML = stepsHtml;
   
-  // Renderizar os blocos de perguntas
   let blocosHtml = '';
   
   blocos.forEach((bloco, blocoIdx) => {
@@ -1181,7 +1269,6 @@ function renderizarPesquisa() {
       </div>
     `;
     
-    // Renderizar cada pergunta do bloco
     bloco.perguntas.forEach((pergunta, perguntaIdx) => {
       const perguntaId = pergunta.id;
       const numFormatado = String(perguntaIdx + 1).padStart(2, '0');
@@ -1193,7 +1280,6 @@ function renderizarPesquisa() {
       if (pergunta.tipo === 'radio') {
         blocosHtml += `<div class="q-options" data-id="${perguntaId}">`;
         pergunta.opcoes.forEach(opt => {
-          const optId = `${perguntaId}_${opt.replace(/[^a-z0-9]/gi, '_')}`;
           blocosHtml += `
             <label class="option" data-pergunta="${perguntaId}" data-valor="${opt.replace(/"/g, '&quot;')}">
               <input type="radio" name="${perguntaId}" value="${opt.replace(/"/g, '&quot;')}">
@@ -1233,7 +1319,6 @@ function renderizarPesquisa() {
       blocosHtml += `</div>`;
     });
     
-    // Botões de navegação
     blocosHtml += `<div class="block-nav">`;
     if (blocoNum > 1) {
       blocosHtml += `<button class="btn-back" onclick="irParaBloco(${blocoNum - 1})">← Voltar</button>`;
@@ -1244,14 +1329,13 @@ function renderizarPesquisa() {
     if (blocoNum < blocos.length) {
       blocosHtml += `<button class="btn-next" onclick="irParaBloco(${blocoNum + 1})">Próximo →</button>`;
     } else {
-      blocosHtml += `<button class="btn-next" onclick="enviarPesquisa()">Enviar Pesquisa </button>`;
+      blocosHtml += `<button class="btn-next" onclick="enviarPesquisa()">Enviar Pesquisa 🌱</button>`;
     }
     blocosHtml += `</div>`;
     
     blocosHtml += `</div>`;
   });
   
-  // Bloco de agradecimento
   blocosHtml += `
     <div class="survey-block hidden" id="thanksBlock">
       <div class="thanks-screen">
@@ -1272,14 +1356,10 @@ function renderizarPesquisa() {
   `;
   
   container.innerHTML = blocosHtml;
-  
-  // Após renderizar, adicionar os event listeners
-  adicionarEventListeners();
+  adicionarEventListenersPesquisa();
 }
 
-// Função para adicionar todos os event listeners das perguntas
-function adicionarEventListeners() {
-  // Radio buttons
+function adicionarEventListenersPesquisa() {
   document.querySelectorAll('.option').forEach(opt => {
     const radio = opt.querySelector('input[type="radio"]');
     if (radio) {
@@ -1292,14 +1372,12 @@ function adicionarEventListeners() {
         const valor = this.value;
         salvarResposta(perguntaId, valor);
         
-        // Atualizar UI
         document.querySelectorAll(`.option input[name="${perguntaId}"]`).forEach(inp => {
           inp.closest('.option')?.classList.remove('selected');
         });
         this.closest('.option')?.classList.add('selected');
       });
       
-      // Se já tiver valor salvo, marcar
       if (respostas[radio.name] === radio.value) {
         radio.checked = true;
         opt.classList.add('selected');
@@ -1307,7 +1385,6 @@ function adicionarEventListeners() {
     }
   });
   
-  // Checkboxes
   document.querySelectorAll('.option input[type="checkbox"]').forEach(cb => {
     const opt = cb.closest('.option');
     const container = cb.closest('.q-options');
@@ -1330,7 +1407,6 @@ function adicionarEventListeners() {
       const valores = checked.map(c => c.value);
       salvarResposta(perguntaId, valores);
       
-      // Atualizar UI
       if (this.checked) {
         opt.classList.add('selected');
       } else {
@@ -1338,7 +1414,6 @@ function adicionarEventListeners() {
       }
     });
     
-    // Restaurar valores salvos
     const saved = respostas[perguntaId];
     if (saved && Array.isArray(saved) && saved.includes(cb.value)) {
       cb.checked = true;
@@ -1346,7 +1421,6 @@ function adicionarEventListeners() {
     }
   });
   
-  // Likert buttons
   document.querySelectorAll('.likert-scale').forEach(scale => {
     const perguntaId = scale.getAttribute('data-id');
     const botoes = scale.querySelectorAll('.likert-btn');
@@ -1360,7 +1434,6 @@ function adicionarEventListeners() {
         this.classList.add('selected');
       });
       
-      // Restaurar valor salvo
       const saved = respostas[perguntaId];
       if (saved && parseInt(saved) === parseInt(btn.getAttribute('data-valor'))) {
         btn.classList.add('selected');
@@ -1368,7 +1441,6 @@ function adicionarEventListeners() {
     });
   });
   
-  // Textareas
   document.querySelectorAll('textarea').forEach(ta => {
     const perguntaId = ta.getAttribute('data-id');
     
@@ -1376,14 +1448,12 @@ function adicionarEventListeners() {
       salvarResposta(perguntaId, this.value);
     });
     
-    // Restaurar valor salvo
     if (respostas[perguntaId]) {
       ta.value = respostas[perguntaId];
     }
   });
 }
 
-// Funções de compartilhamento
 function shareWhatsApp() {
   const url = encodeURIComponent(window.location.href);
   window.open(`https://wa.me/?text=Participei da pesquisa do Agrinho sobre agro sustentável! ${url}`, '_blank');
@@ -1394,7 +1464,6 @@ function copyLink() {
   showToast('🔗 Link copiado!');
 }
 
-// Animar barras de progresso
 function animarBarras() {
   document.querySelectorAll('.progress-fill').forEach(bar => {
     const width = bar.getAttribute('data-width');
@@ -1406,7 +1475,6 @@ function animarBarras() {
   });
 }
 
-// Efeito de scroll no navbar
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
   if (window.scrollY > 50) {
@@ -1416,12 +1484,10 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Menu mobile
 document.getElementById('menuBtn')?.addEventListener('click', () => {
   document.getElementById('mobileMenu').classList.toggle('open');
 });
 
-// Smooth scroll para links internos
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const targetId = this.getAttribute('href');
@@ -1435,10 +1501,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Inicializar tudo quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
   renderizarPesquisa();
   animarBarras();
+  
+  const areaInput = document.getElementById('areaInput');
+  const precoInput = document.getElementById('precoInput');
+  if (areaInput && precoInput) {
+    areaInput.addEventListener('input', calcularLucro);
+    precoInput.addEventListener('input', calcularLucro);
+    calcularLucro();
+  }
 });
 </script>
 </body>
