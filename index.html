@@ -58,7 +58,7 @@ body.high-contrast .hero-badge {
 }
 
 body.high-contrast .stats-bar {
-  background: #000000 !important;
+  background: #111111 !important;
   border-top-color: #ffff00 !important;
 }
 
@@ -69,7 +69,14 @@ body.high-contrast .stat-number {
 body.high-contrast .stat-label {
   color: #ffff00 !important;
   background: #333333 !important;
-  text-shadow: none !important;
+}
+
+body.high-contrast .stat-desc {
+  color: #ffff00 !important;
+}
+
+body.high-contrast .stats-source {
+  color: #ffff00 !important;
 }
 
 body.high-contrast .section,
@@ -85,8 +92,7 @@ body.high-contrast .section-subtitle {
 }
 
 body.high-contrast .card,
-body.high-contrast .survey-block,
-body.high-contrast .sim-card {
+body.high-contrast .survey-block {
   background: #111111 !important;
   color: #ffff00 !important;
   border-color: #ffff00 !important;
@@ -122,10 +128,6 @@ body.high-contrast .option {
 
 body.high-contrast .option.selected {
   background: #ffff00 !important;
-  color: #000000 !important;
-}
-
-body.high-contrast .option.selected span {
   color: #000000 !important;
 }
 
@@ -346,7 +348,8 @@ body {
   background: linear-gradient(135deg, #1a2e2b 0%, #2e5a4f 50%, #1a2e2b 100%);
   position: relative;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   padding-top: 70px;
 }
 
@@ -433,41 +436,65 @@ body {
   background: rgba(255,255,255,0.1);
 }
 
-/* ESTATÍSTICAS - TOTALMENTE VISÍVEIS */
+/* ESTATÍSTICAS CONTEXTUALIZADAS */
 .stats-bar {
-  background: rgba(26,46,43,0.95);
+  background: rgba(26,46,43,0.92);
   backdrop-filter: blur(10px);
-  padding: 24px;
+  padding: 24px 20px 20px 20px;
   display: flex;
   justify-content: center;
-  gap: 48px;
+  gap: 32px;
   flex-wrap: wrap;
-  border-top: 1px solid rgba(200,230,217,0.3);
+  border-top: 1px solid rgba(200,230,217,0.2);
 }
 
 .stat {
   text-align: center;
+  flex: 1;
+  min-width: 140px;
 }
 
 .stat-number {
   font-family: var(--font-serif);
   font-size: 32px;
   font-weight: 700;
-  color: #c8e6d9;
+  color: var(--c4);
   margin-bottom: 4px;
 }
 
 .stat-label {
   font-size: 13px;
   font-weight: 600;
-  color: #ffffff !important;
+  color: #ffffff;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   letter-spacing: 0.5px;
-  margin-top: 6px;
+  margin-top: 4px;
   background: rgba(0,0,0,0.25);
   display: inline-block;
   padding: 3px 12px;
   border-radius: 20px;
+}
+
+.stat-desc {
+  font-size: 10px;
+  color: rgba(255,255,255,0.8);
+  max-width: 160px;
+  margin: 8px auto 0 auto;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.stats-footer {
+  text-align: center;
+  padding: 10px 20px;
+  background: rgba(0,0,0,0.3);
+  border-top: 1px solid rgba(200,230,217,0.15);
+}
+
+.stats-source {
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.5px;
 }
 
 /* SECTIONS */
@@ -995,9 +1022,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
   .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
   .accessibility-panel { top: 75px; left: 10px; padding: 6px 10px; gap: 6px; }
   .accessibility-btn { width: 36px; height: 36px; font-size: 16px; }
-  .stat-label { font-size: 11px; padding: 2px 8px; }
-  .stat-number { font-size: 24px; }
   .stats-bar { gap: 20px; padding: 16px; }
+  .stat { min-width: 120px; }
+  .stat-number { font-size: 24px; }
+  .stat-label { font-size: 11px; padding: 2px 8px; }
+  .stat-desc { font-size: 9px; max-width: 120px; }
+  .stats-source { font-size: 9px; }
 }
 
 @media (max-width: 600px) {
@@ -1011,9 +1041,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
   .likert-btn { min-width: 40px; padding: 8px; }
   .accessibility-panel { top: 70px; left: 8px; padding: 5px 8px; gap: 5px; }
   .accessibility-btn { width: 32px; height: 32px; font-size: 14px; }
-  .stat-label { font-size: 9px; padding: 2px 6px; }
-  .stat-number { font-size: 18px; }
   .stats-bar { gap: 12px; padding: 12px; }
+  .stat { min-width: 100px; }
+  .stat-number { font-size: 18px; }
+  .stat-label { font-size: 9px; }
+  .stat-desc { font-size: 8px; max-width: 100px; }
 }
 </style>
 </head>
@@ -1052,6 +1084,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   </div>
 </nav>
 
+<!-- HERO COM ESTATÍSTICAS CONTEXTUALIZADAS -->
 <section class="hero" id="hero">
   <div class="hero-overlay"></div>
   <div class="container">
@@ -1065,14 +1098,36 @@ input[type="range"]::-webkit-slider-thumb:hover {
       </div>
     </div>
   </div>
+
+  <!-- ESTATÍSTICAS CONTEXTUALIZADAS -->
   <div class="stats-bar">
-    <div class="stat"><div class="stat-number">25%</div><div class="stat-label">do PIB nacional</div></div>
-    <div class="stat"><div class="stat-number">+150</div><div class="stat-label">países abastecidos</div></div>
-    <div class="stat"><div class="stat-number">66%</div><div class="stat-label">vegetação preservada</div></div>
-    <div class="stat"><div class="stat-number">22%</div><div class="stat-label">das emissões globais</div></div>
+    <div class="stat">
+      <div class="stat-number">25%</div>
+      <div class="stat-label">do PIB nacional</div>
+      <div class="stat-desc">O agronegócio responde por 1/4 de toda a riqueza gerada no Brasil</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">+150</div>
+      <div class="stat-label">países abastecidos</div>
+      <div class="stat-desc">O Brasil exporta produtos agropecuários para mais de 150 nações</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">66%</div>
+      <div class="stat-label">vegetação preservada</div>
+      <div class="stat-desc">Mesmo com o avanço da agricultura, 2/3 do território segue nativo</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">22%</div>
+      <div class="stat-label">das emissões globais</div>
+      <div class="stat-desc">Setor agropecuário responde por 22% das emissões mundiais de GEE</div>
+    </div>
+  </div>
+  <div class="stats-footer">
+    <span class="stats-source">📊 Fonte: IPCC (AR6, 2022) | MapBiomas (2023) | Embrapa | MAPA (2024)</span>
   </div>
 </section>
 
+<!-- SOBRE -->
 <section class="section" id="sobre">
   <div class="container">
     <div class="grid-2">
@@ -1090,6 +1145,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   </div>
 </section>
 
+<!-- PRÁTICAS SUSTENTÁVEIS -->
 <section class="section section-alt" id="praticas">
   <div class="container">
     <div class="text-center">
@@ -1142,7 +1198,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   </div>
 </section>
 
-<!-- SEÇÃO MERCADO DE CARBONO COM CALCULADORA -->
+<!-- MERCADO DE CARBONO COM CALCULADORA -->
 <section class="section section-dark" id="carbono">
   <div class="container">
     <div class="grid-2">
@@ -1222,6 +1278,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   </div>
 </section>
 
+<!-- PESQUISA -->
 <section class="section" id="pesquisa">
   <div class="container">
     <div class="text-center">
@@ -1239,6 +1296,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -1400,7 +1458,142 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2000);
 }
 
-// Eventos
+// PESQUISA SIMPLIFICADA
+const blocos = [
+  { nome: "Percepção Geral", icone: "🌿", perguntas: [
+    { id: "p1", texto: "Qual é o seu perfil em relação ao agronegócio?", tipo: "radio", opcoes: ["Produtor rural", "Estudante", "Cidadão urbano", "Profissional ambiental", "Educador"] },
+    { id: "p2", texto: "Como você descreveria sua percepção sobre o papel do agronegócio brasileiro na sustentabilidade?", tipo: "radio", opcoes: ["Principal agente de degradação", "Impactos negativos, mas evoluindo", "Já é sustentável", "Sem opinião"] }
+  ]},
+  { nome: "Descarbonização", icone: "🌾", perguntas: [
+    { id: "p3", texto: "Você conhecia o conceito de descarbonização no campo?", tipo: "radio", opcoes: ["Sim", "Já ouvi falar", "Não conhecia"] }
+  ]},
+  { nome: "Mercado de Carbono", icone: "💱", perguntas: [
+    { id: "p4", texto: "Qual seu conhecimento sobre mercado de carbono?", tipo: "radio", opcoes: ["Nunca ouvi", "Já ouvi o nome", "Conheço bem"] }
+  ]},
+  { nome: "Futuro Sustentável", icone: "🔭", perguntas: [
+    { id: "p5", texto: "Você acredita que o agro sustentável pode gerar crescimento econômico?", tipo: "likert", min: "Não", max: "Sim" }
+  ]}
+];
+
+let blocoAtual = 1;
+
+function renderizarPesquisa() {
+  const container = document.getElementById('surveyBlocks');
+  const stepsContainer = document.getElementById('progressSteps');
+  if (!container) return;
+  
+  let stepsHtml = '';
+  blocos.forEach((_, idx) => {
+    stepsHtml += `<div class="step-dot ${idx === 0 ? 'active' : ''}"><div class="dot"></div><span>Bloco ${idx + 1}</span></div>`;
+    if (idx < blocos.length - 1) stepsHtml += `<div style="width: 20px;"></div>`;
+  });
+  stepsContainer.innerHTML = stepsHtml;
+  
+  let blocosHtml = '';
+  blocos.forEach((bloco, blocoIdx) => {
+    const blocoNum = blocoIdx + 1;
+    blocosHtml += `<div class="survey-block ${blocoNum !== 1 ? 'hidden' : ''}" id="bloco${blocoNum}">`;
+    blocosHtml += `<div class="block-header"><div class="block-icon">${bloco.icone}</div><div><h3>Bloco ${blocoNum} — ${bloco.nome}</h3><p>${bloco.perguntas.length} perguntas</p></div></div>`;
+    
+    bloco.perguntas.forEach((pergunta, perguntaIdx) => {
+      const perguntaId = pergunta.id;
+      blocosHtml += `<div class="question"><div class="q-num">${String(perguntaIdx + 1).padStart(2, '0')}</div><div class="q-text">${pergunta.texto}</div>`;
+      
+      if (pergunta.tipo === 'radio') {
+        blocosHtml += `<div class="q-options">`;
+        pergunta.opcoes.forEach(opt => {
+          blocosHtml += `<label class="option"><input type="radio" name="${perguntaId}" value="${opt}"><span>${opt}</span></label>`;
+        });
+        blocosHtml += `</div>`;
+      } else if (pergunta.tipo === 'likert') {
+        blocosHtml += `<div class="likert-scale" data-id="${perguntaId}">`;
+        for (let i = 1; i <= 5; i++) {
+          blocosHtml += `<button class="likert-btn" data-valor="${i}">${i}</button>`;
+        }
+        blocosHtml += `</div><div class="likert-labels"><span>${pergunta.min}</span><span>${pergunta.max}</span></div>`;
+      }
+      blocosHtml += `</div>`;
+    });
+    
+    blocosHtml += `<div class="block-nav">`;
+    if (blocoNum > 1) blocosHtml += `<button class="btn-back" onclick="irParaBloco(${blocoNum - 1})">← Voltar</button>`;
+    else blocosHtml += `<div></div>`;
+    if (blocoNum < blocos.length) blocosHtml += `<button class="btn-next" onclick="irParaBloco(${blocoNum + 1})">Próximo →</button>`;
+    else blocosHtml += `<button class="btn-next" onclick="enviarPesquisa()">Enviar Pesquisa</button>`;
+    blocosHtml += `</div></div>`;
+  });
+  
+  blocosHtml += `
+    <div class="survey-block hidden" id="thanksBlock">
+      <div class="thanks-screen">
+        <div style="font-size: 48px; margin-bottom: 16px;">✅</div>
+        <h2>Obrigado pela sua participação!</h2>
+        <p>Sua resposta ajuda a construir um retrato real da consciência socioambiental brasileira sobre o campo.</p>
+        <div class="thanks-stats">
+          <div class="thanks-card"><div class="thanks-number">1,1 bi t</div><div>CO₂ a mitigar até 2030</div></div>
+          <div class="thanks-card"><div class="thanks-number">R$ 60 bi</div><div>potencial do mercado de carbono</div></div>
+          <div class="thanks-card"><div class="thanks-number">71%</div><div>jovens produtores priorizam sustentabilidade</div></div>
+        </div>
+        <div><button class="btn-primary" onclick="shareWhatsApp()">Compartilhar</button></div>
+      </div>
+    </div>
+  `;
+  
+  container.innerHTML = blocosHtml;
+  adicionarEventListeners();
+}
+
+function adicionarEventListeners() {
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', function() {
+      const input = opt.querySelector('input');
+      if (input && input.type === 'radio') {
+        document.querySelectorAll(`input[name="${input.name}"]`).forEach(inp => inp.closest('.option')?.classList.remove('selected'));
+        input.checked = true;
+        opt.classList.add('selected');
+      }
+    });
+  });
+  
+  document.querySelectorAll('.likert-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const scale = this.closest('.likert-scale');
+      scale.querySelectorAll('.likert-btn').forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+}
+
+function irParaBloco(blocoNum) {
+  for (let i = 1; i <= blocos.length; i++) {
+    const bloco = document.getElementById(`bloco${i}`);
+    if (bloco) bloco.classList.add('hidden');
+  }
+  const targetBlock = document.getElementById(`bloco${blocoNum}`);
+  if (targetBlock) targetBlock.classList.remove('hidden');
+  blocoAtual = blocoNum;
+  const percent = (blocoAtual / blocos.length) * 100;
+  document.getElementById('progressFill').style.width = `${percent}%`;
+  document.querySelectorAll('.step-dot').forEach((dot, idx) => {
+    dot.classList.remove('active', 'done');
+    if (idx + 1 === blocoAtual) dot.classList.add('active');
+    else if (idx + 1 < blocoAtual) dot.classList.add('done');
+  });
+  document.getElementById('pesquisa').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function enviarPesquisa() {
+  document.getElementById('bloco4').classList.add('hidden');
+  document.getElementById('thanksBlock').classList.remove('hidden');
+  document.getElementById('progressFill').style.width = '100%';
+  showToast('Pesquisa enviada! Obrigado.');
+}
+
+function shareWhatsApp() {
+  window.open(`https://wa.me/?text=Participei da pesquisa do Agrinho! ${encodeURIComponent(location.href)}`, '_blank');
+}
+
+// EVENTOS
 document.getElementById('zoomUpBtn')?.addEventListener('click', zoomUp);
 document.getElementById('zoomDownBtn')?.addEventListener('click', zoomDown);
 document.getElementById('contrastBtn')?.addEventListener('click', toggleContrast);
@@ -1428,8 +1621,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Inicializar calculadora
 document.addEventListener('DOMContentLoaded', () => {
+  renderizarPesquisa();
+  document.querySelectorAll('.progress-fill').forEach(bar => {
+    const width = bar.getAttribute('data-width');
+    if (width) setTimeout(() => bar.style.width = width + '%', 300);
+  });
   const areaInput = document.getElementById('areaInput');
   const precoInput = document.getElementById('precoInput');
   if (areaInput && precoInput) {
@@ -1438,12 +1635,6 @@ document.addEventListener('DOMContentLoaded', () => {
     calcularLucro();
   }
   setZoom('zoom-normal');
-  
-  // Animar barras de progresso
-  document.querySelectorAll('.progress-fill').forEach(bar => {
-    const width = bar.getAttribute('data-width');
-    if (width) setTimeout(() => bar.style.width = width + '%', 300);
-  });
 });
 </script>
 </body>
