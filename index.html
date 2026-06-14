@@ -988,7 +988,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
           <!-- Slider: Área -->
           <div style="margin-bottom: 24px;">
             <label style="display: block; font-weight: 600; margin-bottom: 8px;">🌾 Área recuperada (hectares)</label>
-            <input type="range" id="areaInput" min="0" max="2000" step="10" value="500" style="width: 100%; accent-color: var(--c2);">
+            <input type="range" id="areaInput" min="0" max="2000" step="10" value="500" style="width: 100%;">
             <div style="display: flex; justify-content: space-between; margin-top: 8px;">
               <span style="font-size: 12px;">0 ha</span>
               <span style="font-weight: 700; color: var(--c2);" id="areaValue">500 ha</span>
@@ -999,7 +999,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
           <!-- Slider: Preço do Carbono -->
           <div style="margin-bottom: 24px;">
             <label style="display: block; font-weight: 600; margin-bottom: 8px;">💵 Preço do crédito de carbono (US$ / tonelada)</label>
-            <input type="range" id="precoInput" min="5" max="40" step="1" value="20" style="width: 100%; accent-color: var(--c2);">
+            <input type="range" id="precoInput" min="5" max="40" step="1" value="20" style="width: 100%;">
             <div style="display: flex; justify-content: space-between; margin-top: 8px;">
               <span style="font-size: 12px;">US$ 5/t</span>
               <span style="font-weight: 700; color: var(--c2);" id="precoValue">US$ 20/t</span>
@@ -1088,12 +1088,17 @@ input[type="range"]::-webkit-slider-thumb:hover {
 // AGRINHO 2026 - SCRIPT COMPLETAMENTE FUNCIONAL
 // ============================================================
 
-// CALCULADORA DE CARBONO
+// CALCULADORA DE CARBONO - Função principal
 function calcularLucro() {
+  console.log("Calculando..."); // Para debug
+  
   const areaInput = document.getElementById('areaInput');
   const precoInput = document.getElementById('precoInput');
   
-  if (!areaInput || !precoInput) return;
+  if (!areaInput || !precoInput) {
+    console.log("Elementos não encontrados!");
+    return;
+  }
   
   const area = parseInt(areaInput.value);
   const precoUSD = parseInt(precoInput.value);
@@ -1110,15 +1115,26 @@ function calcularLucro() {
   const impostos = faturamentoBRL * impostosPercent;
   const lucroLiquido = faturamentoBRL - custos - impostos;
   
-  document.getElementById('areaValue').innerHTML = `<strong>${area} ha</strong>`;
-  document.getElementById('precoValue').innerHTML = `<strong>US$ ${precoUSD}/t</strong>`;
-  document.getElementById('sequestroTotal').innerHTML = `<strong>${sequestroTotal.toLocaleString('pt-BR')} t</strong>`;
-  document.getElementById('faturamentoBruto').innerHTML = `<strong>R$ ${faturamentoBRL.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
-  document.getElementById('custos').innerHTML = `<strong>- R$ ${custos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
-  document.getElementById('impostos').innerHTML = `<strong>- R$ ${impostos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  // Atualizar elementos
+  const areaValue = document.getElementById('areaValue');
+  const precoValue = document.getElementById('precoValue');
+  const sequestroTotalEl = document.getElementById('sequestroTotal');
+  const faturamentoBrutoEl = document.getElementById('faturamentoBruto');
+  const custosEl = document.getElementById('custos');
+  const impostosEl = document.getElementById('impostos');
+  const lucroLiquidoEl = document.getElementById('lucroLiquido');
   
-  const lucroElement = document.getElementById('lucroLiquido');
-  lucroElement.innerHTML = `<strong style="font-size: 24px; color: ${lucroLiquido < 0 ? '#d9534f' : 'var(--c2)'};">R$ ${lucroLiquido.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  if (areaValue) areaValue.innerHTML = `<strong>${area} ha</strong>`;
+  if (precoValue) precoValue.innerHTML = `<strong>US$ ${precoUSD}/t</strong>`;
+  if (sequestroTotalEl) sequestroTotalEl.innerHTML = `<strong>${sequestroTotal.toLocaleString('pt-BR')} t</strong>`;
+  if (faturamentoBrutoEl) faturamentoBrutoEl.innerHTML = `<strong>R$ ${faturamentoBRL.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  if (custosEl) custosEl.innerHTML = `<strong>- R$ ${custos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  if (impostosEl) impostosEl.innerHTML = `<strong>- R$ ${impostos.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  if (lucroLiquidoEl) {
+    lucroLiquidoEl.innerHTML = `<strong style="font-size: 24px; color: ${lucroLiquido < 0 ? '#d9534f' : '#2e5a4f'};">R$ ${lucroLiquido.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</strong>`;
+  }
+  
+  console.log("Cálculo finalizado: Lucro = R$", lucroLiquido);
 }
 
 // Objeto para armazenar todas as respostas da pesquisa
@@ -1187,7 +1203,8 @@ function salvarResposta(perguntaId, valor) {
 
 function atualizarProgresso() {
   const percent = (blocoAtual / blocos.length) * 100;
-  document.getElementById('progressFill').style.width = `${percent}%`;
+  const progressFill = document.getElementById('progressFill');
+  if (progressFill) progressFill.style.width = `${percent}%`;
   
   document.querySelectorAll('.step-dot').forEach((dot, idx) => {
     dot.classList.remove('active', 'done');
@@ -1224,9 +1241,14 @@ function enviarPesquisa() {
     }
   });
   
-  document.getElementById('bloco4').classList.add('hidden');
-  document.getElementById('thanksBlock').classList.remove('hidden');
-  document.getElementById('progressFill').style.width = '100%';
+  const bloco4 = document.getElementById('bloco4');
+  const thanksBlock = document.getElementById('thanksBlock');
+  if (bloco4) bloco4.classList.add('hidden');
+  if (thanksBlock) thanksBlock.classList.remove('hidden');
+  
+  const progressFill = document.getElementById('progressFill');
+  if (progressFill) progressFill.style.width = '100%';
+  
   document.querySelectorAll('.step-dot').forEach(dot => {
     dot.classList.remove('active');
     dot.classList.add('done');
@@ -1252,7 +1274,7 @@ function renderizarPesquisa() {
     `;
     if (idx < blocos.length - 1) stepsHtml += `<div style="width: 20px;"></div>`;
   });
-  stepsContainer.innerHTML = stepsHtml;
+  if (stepsContainer) stepsContainer.innerHTML = stepsHtml;
   
   let blocosHtml = '';
   
@@ -1475,6 +1497,7 @@ function animarBarras() {
   });
 }
 
+// Eventos de scroll para o navbar
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
   if (window.scrollY > 50) {
@@ -1484,10 +1507,16 @@ window.addEventListener('scroll', () => {
   }
 });
 
-document.getElementById('menuBtn')?.addEventListener('click', () => {
-  document.getElementById('mobileMenu').classList.toggle('open');
-});
+// Menu mobile
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+if (menuBtn && mobileMenu) {
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+}
 
+// Smooth scroll para links internos
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const targetId = this.getAttribute('href');
@@ -1496,21 +1525,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      document.getElementById('mobileMenu')?.classList.remove('open');
+      if (mobileMenu) mobileMenu.classList.remove('open');
     }
   });
 });
 
+// Inicializar tudo quando o DOM estiver pronto
 document.addEventListener('DOMContentLoaded', () => {
+  console.log("DOM carregado, inicializando...");
+  
   renderizarPesquisa();
   animarBarras();
   
+  // Inicializar a calculadora de carbono
   const areaInput = document.getElementById('areaInput');
   const precoInput = document.getElementById('precoInput');
+  
   if (areaInput && precoInput) {
+    console.log("Calculadora encontrada, adicionando eventos...");
     areaInput.addEventListener('input', calcularLucro);
     precoInput.addEventListener('input', calcularLucro);
-    calcularLucro();
+    calcularLucro(); // Calcular valores iniciais
+  } else {
+    console.log("Calculadora NÃO encontrada! Verificando elementos...");
+    console.log("areaInput:", areaInput);
+    console.log("precoInput:", precoInput);
   }
 });
 </script>
